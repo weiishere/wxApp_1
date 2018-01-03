@@ -1,0 +1,22 @@
+<view class='container-home'>
+  <view class='header'>
+    <text>精品小店</text>
+  </view>
+  <view class='swiper'>
+    <text>swiper</text>
+  </view>
+  <view class='mainWrapper'>
+    <scroll-view class='sideBar'>
+      <view class='menuItem' wx:for="{{menuList}}">
+        <template is="menuItem" data="{{...item}}" />
+      </view>
+    </scroll-view>
+    <view class='mainListWrapper'>
+      mainListWrapper
+    </view>
+  </view>
+</view>
+
+<template name="menuItem">
+  <text>{{name}}</text>
+</template>

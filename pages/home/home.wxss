@@ -1,0 +1,33 @@
+/* pages/home/home.wxss */
+.container-home{
+  height: 100%;
+  box-sizing: border-box;
+}
+.mainWrapper{
+  width: 100%;
+  display: flex;
+  /*flex-direction: column;主轴方向从左至右*/
+  align-items: flex-start;/*交叉轴靠上对齐*/
+  justify-content: space-between;/*主轴分散均匀对齐*/
+}
+.header{
+  width: 100%;
+  height: 200;
+  background: #ccf;
+  text-align: center;
+}
+.swiper{
+  width: 100%;
+  height: 200rpx;
+  text-align: center;
+  background: #0cc;
+}
+.sideBar{
+  flex: 1;
+  height: 100%;
+  background: #66c;
+}
+.mainListWrapper{
+  flex: 3;
+  background: #cc0
+}
