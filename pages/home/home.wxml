@@ -1,22 +1,49 @@
 <view class='container-home'>
-  <view class='header'>
-    <text>精品小店</text>
-  </view>
   <view class='swiper'>
-    <text>swiper</text>
+    <swiper autoplay="{{sliderSet.autoplay}}" circular="{{sliderSet.circular}}">
+      <block wx:for="{{imgUrls}}" >
+        <swiper-item>
+          <image src="{{item.url}}" class="slide-image" />
+          <view class='swiperTitle'>{{item.title}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
+  <!-- <view class='header'>
+    <text>{{showMenu.name}}</text>
+  </view> -->
   <view class='mainWrapper'>
     <scroll-view class='sideBar'>
-      <view class='menuItem' wx:for="{{menuList}}">
+      <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" id="{{item.menuId}}">
         <template is="menuItem" data="{{...item}}" />
       </view>
     </scroll-view>
-    <view class='mainListWrapper'>
-      mainListWrapper
-    </view>
+    <scroll-view scroll-y enable-back-to-top class='mainListWrapper'>
+      <view class="goodsItem" wx:for="{{showGoodList}}" wx:key="id">
+        <template is="goodsItem" data="{{...item}}" />
+      </view>
+    </scroll-view>
   </view>
 </view>
 
 <template name="menuItem">
+  <i style="{{iconColor?'color:#'+iconColor:''}}" class="icon-{{icon}}"></i>
   <text>{{name}}</text>
+</template>
+<template name="goodsItem">
+  <view class='imageWapper'>
+    <image src="{{image}}"></image>
+  </view>
+  <view class='goodTitle'>
+    <i class="icon-product"></i>
+    <text>{{name}}</text>
+  </view>
+  <view class='goodsPrice'>
+    <text>{{price}}</text>
+    <text>单位：{{unit}}</text>
+  </view>
+  <view class='goodsRemark'>
+    <i class="icon-remark"></i>
+    <text>{{remark}}</text>
+  </view>
 </template>

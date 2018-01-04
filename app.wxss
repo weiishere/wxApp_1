@@ -1,4 +1,15 @@
 /**app.wxss**/
+@import "utils/icon-font.wxss";
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 40rpx;
+}
+
+page {
+  font-size: 30rpx;
+  height:100%
+}
+
 .container {
   height: 100%;
   display: flex;
@@ -7,4 +18,4 @@
   justify-content: space-between;
   /*padding: 200rpx 0;*/
   box-sizing: border-box;
-} 
+}
