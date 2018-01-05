@@ -1,9 +1,9 @@
 <view class='container-home'>
   <view class='swiper'>
     <swiper autoplay="{{sliderSet.autoplay}}" circular="{{sliderSet.circular}}">
-      <block wx:for="{{imgUrls}}" >
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item.url}}" class="slide-image" />
+          <image src="{{item.url}}" class="slide-image" bindtap='bindViewTap' />
           <view class='swiperTitle'>{{item.title}}</view>
         </swiper-item>
       </block>
@@ -14,7 +14,7 @@
   </view> -->
   <view class='mainWrapper'>
     <scroll-view class='sideBar'>
-      <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" id="{{item.menuId}}">
+      <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" data-id="{{item.menuId}}" bindtap="chooseMenu">
         <template is="menuItem" data="{{...item}}" />
       </view>
     </scroll-view>

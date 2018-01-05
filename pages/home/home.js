@@ -13,7 +13,8 @@ Page({
       {
         menuId: 2,
         name: '最新上架',
-        icon: 'new'
+        icon: 'new',
+        
       },
       {
         menuId: 3,
@@ -79,8 +80,18 @@ Page({
       },
       {
         id: '115',
-        name: '澳洲爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
+        name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
         categroy: 1,
+        image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
+        price: '￥230',
+        unit: '桶',
+        remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
+        desc: ''
+      },
+      {
+        id: '115',
+        name: '澳洲爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
+        categroy: 5,
         image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
         price: '￥210',
         unit: '桶',
@@ -91,7 +102,7 @@ Page({
     imgUrls: [
       {
         url: 'https://gss3.bdstatic.com/70cFsjip0QIZ8tyhnq/img/iknow/aazdpinpai.png',
-        title:'好妈妈，从这里坐起，你需要知道的育儿知识'
+        title: '好妈妈，从这里坐起，你需要知道的育儿知识'
       },
       {
         url: 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937',
@@ -102,9 +113,9 @@ Page({
         title: '2018新年快乐，迪奥为您呈现'
       }
     ],
-    sliderSet:{
-      autoplay:true,
-      circular:true
+    sliderSet: {
+      autoplay: true,
+      circular: true
     }
   },
   getActiveMenu: function () {
@@ -120,6 +131,27 @@ Page({
       if (item.categroy === menu.menuId) _goodList.push(item);
     })
     return _goodList;
+  },
+  chooseMenu: function (event) {
+    const chooseMenuId = event.currentTarget.dataset.id;
+    let chooseMenu;
+    this.data.menuList.forEach((item) => {
+      if (item.menuId !== chooseMenuId) {
+        item.isActive = false;
+      } else {
+        item.isActive = true;
+        chooseMenu = item;
+      }
+    });
+    this.setData({
+      menuList: this.data.menuList,
+      showGoodList: this.getActiveGoodsList(chooseMenu)
+    })
+  },
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../details/details'
+    })
   },
   onLoad: function () {
     const menu = this.getActiveMenu();
