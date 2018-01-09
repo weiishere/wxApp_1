@@ -70,7 +70,7 @@ Page({
             url: config.service.requestUrl,
             login: true,
             success (result) {
-                util.showSuccess('请求成功完成')
+                util.showSuccess('请求成功完成');
                 console.log('request success', result)
                 that.setData({
                     requestResult: JSON.stringify(result.data)
@@ -116,7 +116,6 @@ Page({
                             imgUrl: res.data.imgUrl
                         })
                     },
-
                     fail: function(e) {
                         util.showModel('上传图片失败')
                     }

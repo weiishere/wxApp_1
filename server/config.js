@@ -3,17 +3,17 @@ const CONF = {
     rootPathname: '',
 
     // 微信小程序 App ID
-    appId: '',
+    appId: 'wx80e1713338eaa27e',
 
     // 微信小程序 App Secret
-    appSecret: '',
+    appSecret: '125308f7e16d0a6ba92ec42d6c8dd871',
 
     // 是否使用腾讯云代理登录小程序
     useQcloudLogin: true,
 
     /**
      * MySQL 配置，用来存储 session 和用户信息
-     * 若使用了腾讯云微信小程序解决方案
+     * 若使用了腾讯云微信小程序解决方案 
      * 开发环境下，MySQL 的初始密码为您的微信小程序 appid
      */
     mysql: {
@@ -22,6 +22,14 @@ const CONF = {
         user: 'root',
         db: 'cAuth',
         pass: 'wx80e1713338eaa27e',
+        char: 'utf8mb4'
+    },
+    mysql_local: {
+        host: 'localhost',
+        user: 'root',
+        pass: 'mysqlroot',
+        db: 'store_DB',
+        port: 3306,
         char: 'utf8mb4'
     },
 
@@ -34,7 +42,7 @@ const CONF = {
         // Bucket 名称
         fileBucket: 'qcloudtest',
         // 文件夹
-        uploadFolder: ''
+        uploadFolder: 'images'
     },
 
     // 微信登录态有效期
@@ -43,3 +51,4 @@ const CONF = {
 }
 
 module.exports = CONF
+
