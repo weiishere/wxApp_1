@@ -1,9 +1,9 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/admin/admin",
     "pages/home/home",
     "pages/details/details",
-    
+    "pages/index/index",
     "pages/addCgi/addCgi"
   ],
   "window":{

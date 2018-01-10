@@ -1,0 +1,11 @@
+<view class='container-admin'>
+  <scroll-view scroll-x class='header'>
+    <view class='header-listWrap'>
+      <view class='{{item.isActive?"active":""}}' data-code="{{item.code}}" wx:for="{{tabList}}" wx:key="{{index}}" bindtap='changeTab'>
+        <i class='{{item.icon}}'></i>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='header-title'>{{showType.name}}-{{showType.desc}}</view>
+</view>

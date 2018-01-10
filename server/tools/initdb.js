@@ -5,7 +5,7 @@
  */
 const fs = require('fs')
 const path = require('path')
-const { mysql: config } = require('../config')
+const { mysql_local: config } = require('../config')
 
 console.log('\n======================================')
 console.log('开始初始化数据库...')
