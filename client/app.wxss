@@ -4,7 +4,9 @@
   font-family: "iconfont" !important;
   font-size: 40rpx;
 }
-
+.hide {
+  display: none !important;
+}
 page {
   font-size: 30rpx;
   height:100%

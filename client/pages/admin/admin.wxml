@@ -8,4 +8,60 @@
     </view>
   </scroll-view>
   <view class='header-title'>{{showType.name}}-{{showType.desc}}</view>
+  <!--banner-->
+  <view class='manWrapper {{showType.code==="banner"?"":"hide"}}'>
+    <scroll-view scroll-y enable-back-to-top>
+      <view wx:for="{{imgUrls}}" wx:key="{{item.id}}" class='bannerItem'>
+        <image src="{{item.url}}"></image>
+        <text>{{item.title}}</text>
+        <view data-id="{{item.id}}" bindtap='btuDeleteBanner'>
+          <icon size='20' type='cancel'></icon>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='bottomBtu'>
+      <button type="default" hover-class="button-hover">新增</button>
+    </view>
+  </view>
+  <!--menu-->
+  <view class='manWrapper {{showType.code==="menu"?"":"hide"}}'>
+    <scroll-view scroll-y enable-back-to-top>
+      <view wx:for="{{menuList}}" wx:key="{{item.id}}" class='menuItem'>
+        <text>{{item.name}}</text>
+        <view data-id="{{item.id}}" bindtap='btuDeleteMenu'>
+          <icon size='20' type='cancel'></icon>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='bottomBtu'>
+      <button type="default" hover-class="button-hover">新增</button>
+    </view>
+  </view>
+  <!--goods-->
+  <view class='manWrapper {{showType.code==="goods"?"":"hide"}}'>
+    <view class='menuSelectWrap'>
+      <picker bindchange="bindPickerChange" value="{{id}}" range="{{menuList}}" range-key="name">
+        <view class="picker">
+          Menu类别：{{menuList[index].name}}▼
+        </view>
+      </picker>
+    </view>
+    <scroll-view scroll-y enable-back-to-top>
+      <view wx:for="{{goods.list}}" wx:key="{{item.id}}" class='menuItem goodsItem'>
+        <image src='{{item.image}}'></image>
+        <text>{{item.name}}</text>
+        <view data-id="{{item.id}}" bindtap='btuDeleteGoods'>
+          <icon size='20' type='cancel'></icon>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='pagerWrapper'>
+      <button>◀</button>
+      <text>第1/22页（共425条）</text>
+      <button>▶</button>
+    </view>
+    <view class='bottomBtu'>
+      <button type="default" hover-class="button-hover">新增</button>
+    </view>
+  </view>
 </view>

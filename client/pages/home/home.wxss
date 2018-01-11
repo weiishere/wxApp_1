@@ -1,8 +1,6 @@
 /* pages/home/home.wxss */
 
-.hide {
-  display: none;
-}
+
 
 .container-home {
   height: 100%;
