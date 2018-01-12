@@ -19,4 +19,11 @@ module.exports = {
       }
     });
   },
+  goEditMenu: function (event) {
+    //console.log('goEditBanner');
+    const id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../edit/edit?mode=menu&action=edit&key=' + id
+    })
+  }
 }

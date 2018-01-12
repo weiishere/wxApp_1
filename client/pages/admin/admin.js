@@ -216,6 +216,11 @@ Page({
           desc: ''
         }
       ]
+    },
+    config:{
+      storeName:'秀容的精品小店',
+      themeColor:'#ccf',
+      welcome:'欢迎来到精品小店，本店新上***，欢迎了解并微信我哦~'
     }
   },
   //**通用方法：获取链表数据 */
@@ -248,7 +253,7 @@ Page({
   ...bannerManager,
   ...goodsManager,
   onLoad: function () {
-    console.log(this);
+    //console.log(this);
     const self = this;
     wx.createSelectorQuery().select('.container-admin').boundingClientRect((rect) => {
       self.setData({

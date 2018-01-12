@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/admin/admin",
+    "pages/edit/edit",
     "pages/home/home",
     "pages/details/details",
     "pages/index/index",

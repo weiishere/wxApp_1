@@ -79,9 +79,9 @@
   background: #eee;
 }
 
-.manWrapper>view {
+.manWrapper .bottomBtu {
   width: 100%;
-  height: 80rpx;
+  height: 100rpx;
 }
 
 .manWrapper .bottomBtu button {
@@ -89,7 +89,7 @@
   height: 100%;
   background: #c00;
   border-radius: 0;
-  line-height: 80rpx;
+  line-height: 100rpx;
   color: #fff;
 }
 
@@ -140,9 +140,19 @@
   border-bottom: solid 1px #ccc;
   display: flex;
 }
+.menuItem i {
+  font-family: 'iconfont';
+  font-size: 44rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+  color: #ff5983;
+  flex: 1;
+  text-align: right
+}
 
 .menuItem text {
   flex: 1;
+  text-align: left
 }
 
 .menuItem view {
@@ -202,4 +212,40 @@
   border-radius: 0;
   line-height: 100rpx;
   color: #666;
+}
+
+.formItemWrapper {
+  width: 100%;
+  text-align: center;
+  padding-top:50rpx;
+}
+
+.formItemWrapper text {
+  width: 20%;
+  font-size: 30rpx;
+  display: inline-block;
+}
+
+.formItemWrapper input {
+  width: 70%;
+  height: 80rpx;
+  display: inline-block;
+  border:solid 1rpx #999;
+  vertical-align: middle;
+  background: #fff;
+  text-align: left;
+  padding-left: 0.2rem;
+  box-shadow:1rpx 1rpx 3rpx #999;
+  border-radius: 10rpx
+}
+.formItemWrapper textarea {
+  width: 70%;
+  display: inline-block;
+  border:solid 1rpx #999;
+  vertical-align: middle;
+  background: #fff;
+  text-align: left;
+  padding-left: 0.2rem;
+  box-shadow:1rpx 1rpx 3rpx #999;
+  border-radius: 10rpx
 }
