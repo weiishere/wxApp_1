@@ -1,12 +1,17 @@
 /**
  * 小程序配置文件
  */
-
+var localHost ="http://localhost:5757";
 // 此处主机域名修改成腾讯云解决方案分配的域名
 var host = 'https://q0ymddaf.qcloud.la';
 
 var config = {
-
+    bannerApi:{
+      list: `${localHost}/weapp/banner/list`,
+      insert:"",
+      remove:"",
+      update:""
+    },
     // 下面的地址配合云端 Demo 工作
     service: {
         host,

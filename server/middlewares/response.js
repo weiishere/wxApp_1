@@ -11,8 +11,10 @@ module.exports = async function (ctx, next) {
         // 处理响应结果
         // 如果直接写入在 body 中，则不作处理
         // 如果写在 ctx.body 为空，则使用 state 作为响应
+        //console.log("ctx.state.code:"+ctx.state.code)
         ctx.body = ctx.body ? ctx.body : {
             code: ctx.state.code !== undefined ? ctx.state.code : 0,
+            stateCode: ctx.state.stateCode !== undefined ? ctx.state.stateCode : 0,
             data: ctx.state.data !== undefined ? ctx.state.data : {}
         }
     } catch (e) {

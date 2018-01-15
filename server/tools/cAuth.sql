@@ -1,18 +1,4 @@
-/*
- Navicat Premium Data Transfer
 
- Source Server         : Localhost
- Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : localhost
- Source Database       : cAuth
-
- Target Server Type    : MySQL
- Target Server Version : 50717
- File Encoding         : utf-8
-
- Date: 08/10/2017 22:22:52 PM
-*/
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -33,5 +19,17 @@ CREATE TABLE `cSessionInfo` (
   KEY `openid` (`open_id`) USING BTREE,
   KEY `skey` (`skey`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='会话管理用户信息';
+
+
+DROP TABLE IF EXISTS `Banners`;
+CREATE TABLE `Banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imageUrl` varchar(500) NOT NULL,
+  `title` varchar(500) NOT NULL,
+  `article` text NOT NULL,
+  `createDate` timestamp,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='banner信息';
+
 
 SET FOREIGN_KEY_CHECKS = 1;

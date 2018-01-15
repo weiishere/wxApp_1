@@ -1,9 +1,38 @@
+const util = require('../../utils/util.js');
+var config = require('../../config')
 module.exports = {
+  /**暂没提供async函数支持 */
+  // getAsyncList: async function () {
+  //   await wx.request({
+  //     url: config.bannerApi.list,
+  //     data: {},
+  //     success: function (res) {
+  //       resolve(res);
+  //     },
+  //     fail: function () {
+  //       wx.showToast({ title: "请求错误~" })
+  //     }
+  //   })
+  // },
+  getList: function () {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: config.bannerApi.list,
+        data: {},
+        success: function (res) {
+          resolve(res);
+        },
+        fail: function () {
+          wx.showToast({ title: "请求错误~" })
+        }
+      })
+    });
+  },
   //**删除banner */
   btuDeleteBanner: function (event) {
     const self = this;
     const _id = event.currentTarget.dataset.id; let index;
-    const chooseBanner = this.getObject(this.data.imgUrls, 'id', _id, function (item, i) {
+    const chooseBanner = util.getObject(this.data.imgUrls, 'id', _id, function (item, i) {
       if (item.id == _id) { index = i; }
     });
     wx.showModal({
@@ -26,5 +55,10 @@ module.exports = {
     wx.navigateTo({
       url: '../edit/edit?mode=banner&action=edit&key=' + id
     })
+  },
+  goAddBanner: function () {
+    wx.navigateTo({
+      url: '../edit/edit?mode=banner&action=add'
+    });
   }
 }

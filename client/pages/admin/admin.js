@@ -90,7 +90,6 @@ Page({
       }
     ],
     goods: {
-      chooseType:1,
       pager: {
         thisPage: 1,
         pagesize: 20,
@@ -215,29 +214,20 @@ Page({
           remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
           desc: ''
         }
-      ]
+      ],
+      chooseType: 0
     },
-    config:{
-      storeName:'秀容的精品小店',
-      themeColor:'#ccf',
-      welcome:'欢迎来到精品小店，本店新上***，欢迎了解并微信我哦~'
+    config: {
+      storeName: '秀容的精品小店',
+      themeColor: '#ccf',
+      welcome: '欢迎来到精品小店，本店新上***，欢迎了解并微信我哦~'
     }
   },
-  //**通用方法：获取链表数据 */
-  getObject: function (list, key, value, handler) {
-    let result;
-    list.forEach((item, i) => {
-      if (item[key] === value) {
-        result = item;
-      }
-      handler && handler(item, i);
-    });
-    return result;
-  },
+
   //**切换tab */
   changeTab: function (event) {
     const code = event.currentTarget.dataset.code;
-    const chooseTab = this.getObject(this.data.tabList, 'code', code, function (item) {
+    const chooseTab = util.getObject(this.data.tabList, 'code', code, function (item) {
       if (item.code !== code) {
         item.isActive = false;
       } else {
@@ -255,11 +245,20 @@ Page({
   onLoad: function () {
     //console.log(this);
     const self = this;
-    wx.createSelectorQuery().select('.container-admin').boundingClientRect((rect) => {
-      self.setData({
-        showType: self.data.tabList[0]
+    wx.showLoading('加载中...');
+    this.getList().then((res)=>{
+      this.setData({
+        showType: self.data.tabList[0],
+        imgUrls: res.data.data
       });
-    }).exec();
+      wx.hideLoading();
+    })
+    
+    // wx.createSelectorQuery().select('.container-admin').boundingClientRect((rect) => {
+    //   self.setData({
+    //     showType: self.data.tabList[0]
+    //   });
+    // }).exec();
 
   }
 })

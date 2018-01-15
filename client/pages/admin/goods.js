@@ -1,7 +1,9 @@
+const util = require('../../utils/util.js');
 module.exports = {
-  bindPickerChange: function (e) {
+
+  bindgoodsTypePickerChange: function (e) {
     //console.log('picker发送选择改变，携带值为', e.detail.value)
-    const goodsData = this.getGoodsListByType(e.detail.value);
+    const goodsData = this.getGoodsListByType(1, e.detail.value);
     this.setData({
       goods: goodsData
     })
@@ -20,7 +22,7 @@ module.exports = {
   btuDeleteGoods: function (event) {
     const self = this;
     const _id = event.currentTarget.dataset.id; let index;
-    const chooseGoods = this.getObject(this.data.goods.list, 'id', _id, function (item, i) {
+    const chooseGoods = util.getObject(this.data.goods.list, 'id', _id, function (item, i) {
       if (item.id == _id) { index = i; }
     });
     wx.showModal({
@@ -34,6 +36,17 @@ module.exports = {
           });
         }
       }
+    });
+  },
+  goEditGoods: function (event) {
+    const id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../edit/edit?mode=goods&action=edit&key=' + id
+    })
+  },
+  goAddGoods: function () {
+    wx.navigateTo({
+      url: '../edit/edit?mode=goods&action=add'
     });
   }
 }

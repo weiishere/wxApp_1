@@ -1,26 +1,27 @@
-<import src="../../utils/towxml/entry.wxml"/>
+<import src="../../utils/towxml/entry.wxml" />
 
 <view class='container-edit'>
   <scroll-view scroll-y class="mainWrapper">
     <view class='menuItem' wx:for="{{fromsList}}" wx:key="index">
-        <template is="{{item.template}}" data="{{...item}}" />
-      </view>
+      <template is="{{item.template}}" data="{{...item}}" />
+    </view>
   </scroll-view>
   <view class='bottomBtu'>
-    <button type="default" hover-class="button-hover">提交</button>
+    <button type="default" hover-class="button-hover" bindtap='submit'>提交</button>
   </view>
 </view>
 
 <template name="input">
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
-    <input type='text' value='{{default}}' bindinput="textInput" />
+    <input type='text' value='{{value}}' data-key='{{key}}' bindinput="textInput" />
   </view>
 </template>
 
 <template name="text">
   <view class="formItemWrapper" class='{{activeClass}}'>
-    <text>{{title}}：</text> <text>{{value}}</text>
+    <text>{{title}}：</text>
+    <text>{{value}}</text>
   </view>
 </template>
 
@@ -28,7 +29,7 @@
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
     <!-- <template is="entry" data="{{...value}}" /> 这是一个html渲染库，也许用得着-->
-    <textarea value='{{value}}'></textarea>
+    <textarea data-key='{{key}}' bindinput="textInput" value='{{value}}'></textarea>
   </view>
 </template>
 
@@ -36,18 +37,22 @@
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
     <view class="uploader">
-        <view class="uploader-text" bindtap="doUpload">
-            <text>上传图片</text>
-        </view>
-        <view class="uploader-container" wx:if="{{imgUrl}}">
-            <image
-                class="uploader-image"
-                src="{{imgUrl}}"
-                mode="aspectFit"
-                bindtap="previewImg"
-            ></image>
-        </view>
+      <view class="uploader-text" bindtap="doUpload">
+        <text>上传图片</text>
+      </view>
+      <view class="uploader-container" wx:if="{{imgUrl}}">
+        <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+      </view>
     </view>
   </view>
 </template>
 
+<template name="select">
+  <view class='menuSelectWrap'>
+    <picker bindchange="unitPickerChange" value="{{chooseIndex}}" range="{{selectList}}" range-key="name">
+      <view class="picker">
+        {{title}}：{{selectList[chooseIndex].name}}▼
+      </view>
+    </picker>
+  </view>
+</template>

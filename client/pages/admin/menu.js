@@ -1,9 +1,10 @@
+const util = require('../../utils/util.js');
 module.exports = {
   //**删除菜单 */
   btuDeleteMenu: function (event) {
     const self = this;
     const _id = event.currentTarget.dataset.id; let index;
-    const chooseMenu = this.getObject(this.data.menuList, 'id', _id, function (item, i) {
+    const chooseMenu = util.getObject(this.data.menuList, 'id', _id, function (item, i) {
       if (item.id == _id) { index = i; }
     });
     wx.showModal({
@@ -25,5 +26,10 @@ module.exports = {
     wx.navigateTo({
       url: '../edit/edit?mode=menu&action=edit&key=' + id
     })
+  },
+  goAddMenu:function(){
+    wx.navigateTo({
+      url: '../edit/edit?mode=banner&action=add'
+    });
   }
 }
