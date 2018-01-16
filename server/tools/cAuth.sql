@@ -27,9 +27,37 @@ CREATE TABLE `Banners` (
   `imageUrl` varchar(500) NOT NULL,
   `title` varchar(500) NOT NULL,
   `article` text NOT NULL,
-  `createDate` timestamp,
+  `createDate` timestamp(6),
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='banner信息';
 
+DROP TABLE IF EXISTS `Menu`;
+CREATE TABLE `Menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) NOT NULL,
+  `icon` varchar(20) NOT NULL,
+  `parentId` int(11) NULL,
+  `createDate` timestamp(6),
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Menu信息';
+insert into `menu` (`name`,`icon`) values 
+('店主推荐', 'home'),('最新上架', 'new'),('护肤美妆', 'brand-makeup'),
+('首饰精品', 'jewelry'),('母婴喂养', 'baby1'),('其他精品', 'Recommend');
+
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categroy` varchar(11) NOT NULL,
+  `image` varchar(500) NOT NULL,
+  `price` varchar(100) NOT NULL,
+  `discount` FLOAT NOT NULL DEFAULT 1,
+  `unit` varchar(50) NOT NULL,
+  `remark` varchar(800) NULL,
+  `storage` varchar(50) NULL,
+  `introduction`  text NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `createDate` timestamp(6),
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='商品信息';
 
 SET FOREIGN_KEY_CHECKS = 1;

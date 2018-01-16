@@ -1,5 +1,21 @@
 const util = require('../../utils/util.js');
+var config = require('../../config');
+
 module.exports = {
+  getMenuList: function () {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: config.menuApi.list,
+        data: {},
+        success: function (res) {
+          resolve(res.data);
+        },
+        fail: function () {
+          wx.showToast({ title: "请求错误~" })
+        }
+      })
+    });
+  },
   //**删除菜单 */
   btuDeleteMenu: function (event) {
     const self = this;

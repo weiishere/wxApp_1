@@ -23,6 +23,7 @@ Page({
       item: {}
     }
   },
+  ...bannerManager,
   doUpload: function () {
     // 选择图片
     wx.chooseImage({
@@ -67,7 +68,7 @@ Page({
     return [
       {
         template: 'imageUpload',
-        key: 'bannerImage',
+        key: 'imageUrl',
         activeClass: 'imageUploadWrapper',
         title: 'banner主图'
       },
@@ -78,7 +79,7 @@ Page({
       },
       {
         template: 'freeText',
-        key: 'content',
+        key: 'article',
         title: '主内容',
         value: ""
       }
@@ -189,12 +190,27 @@ Page({
   },
   submit: function () {
     console.log(this.data.fromsList);
+    if (this.data.action === 'add') {
+      switch (this.data.mode) {
+        case 'banner':
+          this.addBanner(this.data.fromsList);
+          break;
+        case 'menu':
+
+          break;
+        case 'goods':
+
+          break;
+      }
+    } else if (this.data.action === 'edit') {
+
+    }
   },
   onLoad: function ({ mode, action, key }) {
     let _fromsList;
     wx.setNavigationBarTitle({
       title: mode + '-' + (action === 'edit' ? '编辑' : '新增')
-    })
+    });
     switch (mode) {
       case 'banner': _fromsList = this.initBannerView({ action, key }); break;
       case 'menu': _fromsList = this.initMenuView({ action, key }); break;

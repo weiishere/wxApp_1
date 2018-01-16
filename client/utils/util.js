@@ -34,7 +34,7 @@ var showModel = (title, content) => {
 
   wx.showModal({
     title,
-    content: JSON.stringify(content),
+    content: JSON.stringify(content || '暂无异常描述'),
     showCancel: false
   })
 }
