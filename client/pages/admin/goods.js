@@ -12,12 +12,39 @@ module.exports = {
     return {
       chooseType: menuId || this.data.goods.chooseType,
       pager: {
-        thisPage: pageIndex,
+        thisPage: pageIndex || 1,
         pagesize: 20,
         recodeCount: 133
       },
       list: []
     };
+  },
+  getGoods: function (id) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: config.bannerApi.list,
+        data: { id: id },
+        success: function (res) {
+          resolve(res.data[0]);
+        },
+        fail: function () {
+          wx.showToast({ title: "请求错误~" })
+        }
+      });
+    });
+
+  },
+  addGoods: function (fromsList) {
+    const postData = {};
+    fromsList.forEach(item => {
+      postData[item.key] = item.value;
+    });
+    console.log(postData);
+    return;
+    util.singleRequest({
+      url: config.goodsApi.insert,
+      postData: postData
+    });
   },
   btuDeleteGoods: function (event) {
     const self = this;

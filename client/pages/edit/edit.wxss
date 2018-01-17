@@ -79,3 +79,4 @@
   box-shadow:2rpx 2rpx 2rpx #999;
   border-radius: 20rpx
 }
+.uploader-image{width: 100%}

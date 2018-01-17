@@ -2,11 +2,11 @@ const util = require('../../utils/util.js');
 var config = require('../../config');
 
 module.exports = {
-  getMenuList: function () {
+  getMenuList: function (param) {
     return new Promise((resolve, reject) => {
       wx.request({
         url: config.menuApi.list,
-        data: {},
+        data: param || {},
         success: function (res) {
           resolve(res.data);
         },
@@ -28,12 +28,38 @@ module.exports = {
       content: '你确定要删除菜单-(' + chooseMenu.name + ")吗？",
       success: function (res) {
         if (res.confirm) {
-          self.data.menuList.splice(index, 1);
-          self.setData({
-            menuList: self.data.menuList
+          util.singleRequest({
+            url: config.menuApi.remove,
+            postData: { id: _id },
+            success: () => {
+              self.data.menuList.splice(index, 1);
+              self.setData({
+                menuList: self.data.menuList
+              });
+            }
           });
         }
       }
+    });
+  },
+  addMenu: function (fromsList) {
+    const postData = {};
+    fromsList.forEach(item => {
+      postData[item.key] = item.value;
+    });
+    util.singleRequest({
+      url: config.menuApi.insert,
+      postData: postData
+    });
+  },
+  updateMenu: function (fromsList) {
+    const postData = {};
+    fromsList.forEach(item => {
+      postData[item.key] = item.value;
+    });
+    util.singleRequest({
+      url: config.menuApi.update,
+      postData: postData
     });
   },
   goEditMenu: function (event) {
@@ -43,9 +69,10 @@ module.exports = {
       url: '../edit/edit?mode=menu&action=edit&key=' + id
     })
   },
+  
   goAddMenu:function(){
     wx.navigateTo({
-      url: '../edit/edit?mode=banner&action=add'
+      url: '../edit/edit?mode=menu&action=add'
     });
   }
 }

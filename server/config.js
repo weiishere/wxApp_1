@@ -33,17 +33,17 @@ const CONF = {
         port: 3306,
         char: 'utf8mb4'
     },
-
+    imagesHost: 'https://xiu-store-1255815795.cos.ap-chengdu.myqcloud.com/',
     cos: {
         /**
          * 地区简称
          * @查看 https://cloud.tencent.com/document/product/436/6224
          */
-        region: 'ap-guangzhou',
+        region: 'ap-chengdu',
         // Bucket 名称
-        fileBucket: 'qcloudtest',
+        fileBucket: 'xiu-store',
         // 文件夹
-        uploadFolder: 'images'
+        uploadFolder: 'images/' + (new Date()).toLocaleDateString()
     },
 
     // 微信登录态有效期

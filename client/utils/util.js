@@ -50,5 +50,53 @@ var getObject = function (list, key, value, handler) {
   });
   return result;
 }
+var getItemDataByServer = function ({ url, keyData }) {
+  wx.showLoading('加载中...');
+  return Promise((resolve, reject) => {
+    wx.request({
+      url: url,
+      data: keyData,
+      success: function (res) {
+        if (res.data.code == '00001') {
+          resolve(res.data);
+        } else {
+          util.showModel('操作失败(' + res.data.code + ')');
+          reject();
+        }
+      },
+      fail: function () {
+        showModel('请求错误');
+        reject();
+      },
+      complete: function () {
+        wx.hideLoading();
+      }
+    });
+  });
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, getObject }
+}
+var singleRequest = function ({ url, postData, success, error, fail, complete }) {
+  wx.request({
+    url: url,
+    data: postData,
+    method: 'POST',
+    success: function (res) {
+      if (res.data.code == '00001') {
+        showSuccess('操作成功');
+        success && success(res.data);
+      } else {
+        showModel('操作失败(' + res.data.code + ')');
+        error && error(res.data);
+      }
+    },
+    fail: function () {
+      showModel('请求错误');
+      fail && fail();
+    },
+    complete: function () {
+      wx.hideLoading();
+      complete && complete();
+    }
+  });
+}
+module.exports = { formatTime, showBusy, showSuccess, showModel, getObject, getItemDataByServer, singleRequest }

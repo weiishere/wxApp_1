@@ -7,7 +7,7 @@
     </view>
   </scroll-view>
   <view class='bottomBtu'>
-    <button type="default" hover-class="button-hover" bindtap='submit'>提交</button>
+    <button type="default" hover-class="button-hover" bindtap='submit'>{{buttonName}}</button>
   </view>
 </view>
 
@@ -37,11 +37,11 @@
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
     <view class="uploader">
-      <view class="uploader-text" bindtap="doUpload">
+      <view class="uploader-text" data-key='{{key}}' bindtap="doUpload">
         <text>上传图片</text>
       </view>
-      <view class="uploader-container" wx:if="{{imgUrl}}">
-        <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+      <view class="uploader-container" wx:if="{{value}}">
+        <image class="uploader-image" src="{{value}}" data-imgurl="{{value}}" mode="widthFix" bindtap="previewImg"></image>
       </view>
     </view>
   </view>

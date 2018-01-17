@@ -28,6 +28,7 @@ async function list(ctx, next) {
     //查询单个数据才给出详情，列表不给
     const result = id ? DB('goods').where('id', id) : DB('goods').select('id','categroy', 'mainImage', 'price', 'discount', 'unit', 'remark', 'storage', 'status');
     await result.then(function (info) {
+        //const count = DB('goods').count();
         ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
     }, function (e) {
         ctx.state = { code: e.sqlState, data: e.sqlMessage, stateCode: httpCode.sqlErrorCode };

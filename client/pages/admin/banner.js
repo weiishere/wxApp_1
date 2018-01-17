@@ -15,11 +15,11 @@ module.exports = {
   //     }
   //   })
   // },
-  getBannerList: function () {
+  getBannerList: function (param) {
     return new Promise((resolve, reject) => {
       wx.request({
         url: config.bannerApi.list,
-        data: {},
+        data: param || {},
         success: function (res) {
           resolve(res.data);
         },
@@ -42,27 +42,14 @@ module.exports = {
       success: function (res) {
         if (res.confirm) {
           //delete cooseBanner;
-          wx.showLoading('加载中...');
-          wx.request({
+          util.singleRequest({
             url: config.bannerApi.remove,
-            data: { id: _id },
-            method: 'POST',
-            success: function (res) {
-              if (res.data.code == '00001') {
-                util.showSuccess('删除操作成功');
-                self.data.imgUrls.splice(index, 1);
-                self.setData({
-                  imgUrls: self.data.imgUrls
-                });
-              } else {
-                util.showModel('操作失败(' + res.data.code + ')')
-              }
-            },
-            fail: function () {
-              util.showModel('请求错误');
-            },
-            complete: function () {
-              wx.hideLoading();
+            postData: { id: _id },
+            success: () => {
+              self.data.imgUrls.splice(index, 1);
+              self.setData({
+                imgUrls: self.data.imgUrls
+              });
             }
           });
         }
@@ -74,25 +61,19 @@ module.exports = {
     fromsList.forEach(item => {
       postData[item.key] = item.value;
     });
-    postData['imageUrl'] = 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937';//调试，默认给一张图片
-    wx.showLoading('加载中...');
-    wx.request({
+    util.singleRequest({
       url: config.bannerApi.insert,
-      data: postData,
-      method: 'POST',
-      success: function (res) {
-        if (res.data.code == '00001') {
-          util.showSuccess('新增操作成功');
-        } else {
-          util.showModel('操作失败(' + res.data.code + ')')
-        }
-      },
-      fail: function () {
-        util.showModel('请求错误');
-      },
-      complete: function () {
-        wx.hideLoading();
-      }
+      postData: postData
+    });
+  },
+  updateBanner: function (fromsList) {
+    const postData = {};
+    fromsList.forEach(item => {
+      postData[item.key] = item.value;
+    });
+    util.singleRequest({
+      url: config.bannerApi.update,
+      postData: postData
     });
   },
   goEditBanner: function (event) {

@@ -17,7 +17,7 @@ Page({
         code: 'banner',
         desc: '轮播图片信息管理',
         icon: 'icon-banner_set',
-        
+
       },
       {
         name: 'Menu',
@@ -246,15 +246,16 @@ Page({
   onLoad: function (option) {
     //console.log(this);
     //console.log(option.query)
-    
-    
+
+
   },
-  onShow:function(){
+  onShow: function () {
     const self = this;
     wx.showLoading('加载中...');
+    const _showType = util.getObject(self.data.tabList, 'isActive', true);
     Promise.all([this.getBannerList(), this.getMenuList()]).then(values => {
       this.setData({
-        showType: self.data.tabList[0],//显示第一项
+        showType: _showType,
         imgUrls: values[0].data,
         menuList: values[1].data
       });
