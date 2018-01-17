@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js');
+var config = require('../../config');
 const goodsManager = require('../admin/goods.js');
 const bannerManager = require('../admin/banner.js');
 const menuManager = require('../admin/menu.js');
@@ -45,9 +46,9 @@ Page({
             console.log(res)
             res = JSON.parse(res.data)
             console.log(res)
-            that.setData({
-              imgUrl: res.data.imgUrl
-            })
+            // that.setData({
+            //   imgUrl: res.data.imgUrl
+            // })
           },
           fail: function (e) {
             util.showModel('上传图片失败')

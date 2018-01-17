@@ -6,10 +6,17 @@ Page({
   data: {
     tabList: [
       {
+        name: 'Goods',
+        code: 'goods',
+        desc: '商品管理',
+        icon: 'icon-goods',
+        isActive: true
+      },
+      {
         name: 'Banner',
         code: 'banner',
         desc: '轮播图片信息管理',
-        icon: 'icon-banner_set'
+        icon: 'icon-banner_set',
         
       },
       {
@@ -17,13 +24,6 @@ Page({
         code: 'menu',
         desc: '商品类别管理',
         icon: 'icon-menu'
-      },
-      {
-        name: 'Goods',
-        code: 'goods',
-        desc: '商品管理',
-        icon: 'icon-goods',
-        isActive: true
       },
       {
         name: 'Config',
@@ -246,18 +246,19 @@ Page({
   onLoad: function (option) {
     //console.log(this);
     //console.log(option.query)
+    
+    
+  },
+  onShow:function(){
     const self = this;
     wx.showLoading('加载中...');
     Promise.all([this.getBannerList(), this.getMenuList()]).then(values => {
       this.setData({
-        showType: self.data.tabList[2],//显示第一项
+        showType: self.data.tabList[0],//显示第一项
         imgUrls: values[0].data,
         menuList: values[1].data
       });
       wx.hideLoading();
     });
-  },
-  onShow:function(){
-    console.log(89);
   }
 })
