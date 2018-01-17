@@ -67,7 +67,7 @@ Page({
   },
   initMenuView: function (param) {
     let initData = (item) => {
-      return [
+      let result = [
         {
           template: 'input',
           key: 'name',
@@ -79,8 +79,27 @@ Page({
           key: 'icon',
           title: '图标名称',
           value: item && item.icon
+        },
+        {
+          template: 'select',
+          key: 'type',
+          title: '类别特征',
+          selectList: [
+            { value: 'category', name: 'category' },
+            { value: 'custom', name: 'custom' },
+            { value: 'hide', name: 'hide' }
+          ],
+          chooseIndex: 0,
+          value: item ? item.type : 'category'
         }
       ]
+      //处理选择器picker的显示Index，因为只是处理了value还不够，虽然不影响功能，但是下拉初始显示可能不正确
+      if (item) {
+        let _item = util.getObject(result, 'key', 'type');
+        let index = util.getObject(_item.selectList, 'value', item.type);
+        _item.chooseIndex = _item.selectList.indexOf(index);
+      }
+      return result;
     }
     param.action === 'edit' && wx.showLoading('加载中...');
     return new Promise((resolve, reject) => {
@@ -173,13 +192,18 @@ Page({
       }
     });
   },
-  unitPickerChange: function (e) {
+  pickerChange: function (e) {
     //const goodstype = util.getObject(this.data.goodsType, 'id', e.detail.value);
-    util.getObject(this.data.fromsList, "key", "unit", function (item, i) {
-      if (item.key === 'unit') {
-        item.chooseIndex = e.detail.value;
-      }
-    })
+    if (!this.data.activeItem || e.currentTarget.dataset.key !== this.data.activeItem.key) {
+      this.data.activeItem = util.getObject(this.data.fromsList, "key", e.currentTarget.dataset.key);
+    }
+    this.data.activeItem.chooseIndex = e.detail.value;
+    this.data.activeItem.value = this.data.activeItem.selectList[this.data.activeItem.chooseIndex].value;
+    // util.getObject(this.data.fromsList, "key", "unit", function (item, i) {
+    //   if (item.key === 'unit') {
+    //     item.chooseIndex = e.detail.value;
+    //   }
+    // })
     this.setData({
       fromsList: this.data.fromsList
     })

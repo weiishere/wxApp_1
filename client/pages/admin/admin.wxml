@@ -28,7 +28,7 @@
   <view class='manWrapper {{showType.code==="menu"?"":"hide"}}'>
     <scroll-view scroll-y enable-back-to-top>
       <view wx:for="{{menuList}}" wx:key="{{item.id}}" class='menuItem' data-id="{{item.id}}" bindtap='goEditMenu'>
-        <i class='icon-{{item.icon}}'></i><text>{{item.name}}</text>
+        <i class='icon-{{item.icon}}'></i><text>{{item.name}}</text><text class='typeText'>类型：({{item.type}})</text>
         <view data-id="{{item.id}}" catchtap='btuDeleteMenu'>
           <icon size='20' type='cancel'></icon>
         </view>

@@ -2,13 +2,14 @@ const { DB } = require('./db');
 const httpCode = require('../utils/httpCode');
 
 async function insert(ctx, next) {
-    const { name, icon, parentId } = ctx.request.body;
+    const { name, icon, parentId,type } = ctx.request.body;
     await DB('menu')
         .returning('id')
         .insert({
             name: name,
             icon: icon,
-            parentId: parentId
+            parentId: parentId,
+            type: type
         }).then(function (info) {
             ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
         }, function (e) {
@@ -40,7 +41,7 @@ async function remove(ctx, next) {
 }
 
 async function update(ctx, next) {
-    const { id, name, icon, parentId } = ctx.request.body;
+  const { id, name, icon, parentId, type } = ctx.request.body;
     if(!id){
         ctx.state = { code: httpCode.paramNullCode, data: 'id参数为空', stateCode: httpCode.paramNullCode };
         return next();
@@ -50,6 +51,7 @@ async function update(ctx, next) {
             name: name,
             icon: icon,
             parentId: parentId,
+            type: type,
             thisKeyIsSkipped: undefined
         }).then(function (info) {
             ctx.state = { code: httpCode.successCode, data: 'success', stateCode: httpCode.successCode };

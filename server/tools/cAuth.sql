@@ -21,23 +21,24 @@ CREATE TABLE `cSessionInfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='会话管理用户信息';
 
 
-DROP TABLE IF EXISTS `Banners`;
-CREATE TABLE `Banners` (
+DROP TABLE IF EXISTS `banners`;
+CREATE TABLE `banners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imageUrl` varchar(500) NOT NULL,
   `title` varchar(500) NOT NULL,
   `article` text NOT NULL,
-  `createDate` timestamp(6),
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='banner信息';
 
-DROP TABLE IF EXISTS `Menu`;
-CREATE TABLE `Menu` (
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `benu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
   `icon` varchar(20) NOT NULL,
-  `parentId` int(11) NULL,
-  `createDate` timestamp(6),
+  `parentId` int(11) NOT NULL DEFAULT 0,
+  `type` varchar(30) NOT NULL DEFAULT 'category',
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Menu信息';
 insert into `menu` (`name`,`icon`) values 
@@ -56,7 +57,7 @@ CREATE TABLE `goods` (
   `storage` varchar(50) NULL,
   `introduction`  text NULL,
   `status` int(11) NOT NULL DEFAULT '1',
-  `createDate` timestamp(6),
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='商品信息';
 

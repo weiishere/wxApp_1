@@ -49,7 +49,7 @@
 
 <template name="select">
   <view class='menuSelectWrap'>
-    <picker bindchange="unitPickerChange" value="{{chooseIndex}}" range="{{selectList}}" range-key="name">
+    <picker bindchange="pickerChange" data-key='{{key}}' value="{{chooseIndex}}" range="{{selectList}}" range-key="name">
       <view class="picker">
         {{title}}：{{selectList[chooseIndex].name}}▼
       </view>
