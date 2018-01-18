@@ -86,13 +86,24 @@ Page({
           title: '类别特征',
           selectList: [
             { value: 'category', name: 'category(用于产品类型)' },
-            { value: 'custom', name: 'custom(自定义菜单项，不用于产品)' },
+            { value: 'custom', name: 'custom(非强类别，自定义标签)' },
             { value: 'hide', name: 'hide(隐藏菜单)' }
           ],
+          changeBack: function (fromList) {
+            fromList[3].visible = (this.value !== 'custom');
+          },
           chooseIndex: 0,
           value: item ? item.type : 'category'
-        }
+        },
+        {
+          template: 'input',
+          key: 'name',
+          title: '标签名称',
+          value: item && item.tag,
+          visible: item ? item.type !== 'custom' : true
+        },
       ]
+      console.log(result);
       //处理选择器picker的显示Index，因为只是处理了value还不够，虽然不影响功能，但是下拉初始显示可能不正确
       if (item) {
         let _item = util.getObject(result, 'key', 'type');
@@ -229,6 +240,7 @@ Page({
     //     item.chooseIndex = e.detail.value;
     //   }
     // })
+    this.data.activeItem.changeBack && this.data.activeItem.changeBack(this.data.fromsList);
     this.setData({
       fromsList: this.data.fromsList
     })
