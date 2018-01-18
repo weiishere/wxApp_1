@@ -41,7 +41,7 @@ Page({
       {
         id: '111',
         name: '爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        categroy: 1,
+        category: 1,
         image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
         price: '￥180',
         unit: '桶',
@@ -51,7 +51,7 @@ Page({
       {
         id: '112',
         name: '2爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        categroy: 2,
+        category: 2,
         image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
         price: '￥180',
         unit: '桶',
@@ -61,7 +61,7 @@ Page({
       {
         id: '113',
         name: '3爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        categroy: 3,
+        category: 3,
         image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
         price: '￥180',
         unit: '桶',
@@ -71,7 +71,7 @@ Page({
       {
         id: '114',
         name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        categroy: 4,
+        category: 4,
         image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
         price: '￥180',
         unit: '桶',
@@ -81,7 +81,7 @@ Page({
       {
         id: '115',
         name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-        categroy: 1,
+        category: 1,
         image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
         price: '￥230',
         unit: '桶',
@@ -91,7 +91,7 @@ Page({
       {
         id: '115',
         name: '澳洲爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-        categroy: 5,
+        category: 5,
         image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
         price: '￥210',
         unit: '桶',
@@ -128,7 +128,7 @@ Page({
   getActiveGoodsList: function (menu) {
     let _goodList = [];
     this.data.goodsList.forEach((item) => {
-      if (item.categroy === menu.menuId) _goodList.push(item);
+      if (item.category === menu.menuId) _goodList.push(item);
     })
     return _goodList;
   },

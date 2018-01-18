@@ -1,15 +1,18 @@
 /**app.wxss**/
 @import "utils/icon-font.wxss";
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 40rpx;
 }
+
 .hide {
   display: none !important;
 }
+
 page {
   font-size: 30rpx;
-  height:100%
+  height: 100%;
 }
 
 .container {
@@ -21,3 +24,11 @@ page {
   /*padding: 200rpx 0;*/
   box-sizing: border-box;
 }
+
+.picker text {
+  border: solid 1px #999;
+  border-radius: 10rpx;
+  padding: 5rpx 10rpx;
+  background:-webkit-linear-gradient(top,#eee,#ccc);
+}
+.picker text:active{background: #eee}

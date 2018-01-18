@@ -48,13 +48,15 @@ insert into `menu` (`name`,`icon`) values
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `categroy` varchar(11) NOT NULL,
-  `image` varchar(500) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `category` varchar(11) NOT NULL,
+  `mainImage` varchar(500) NOT NULL,
   `price` varchar(100) NOT NULL,
   `discount` FLOAT NOT NULL DEFAULT 1,
   `unit` varchar(50) NOT NULL,
   `remark` varchar(800) NULL,
   `storage` varchar(50) NULL,
+  `introImage`  varchar(1000) NULL,
   `introduction`  text NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

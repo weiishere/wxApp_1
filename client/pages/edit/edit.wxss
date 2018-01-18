@@ -4,7 +4,11 @@
   flex-direction: column;
   box-sizing: border-box;
 }
-.button-hover{background: #c33}
+
+.button-hover {
+  background: #c33;
+}
+
 .container-edit .mainWrapper {
   flex: 1;
   width: 100%;
@@ -29,7 +33,7 @@
 .menuItem {
   padding: 15rpx;
   margin: 15rpx;
-  border-bottom: solid 1px #ddd
+  border-bottom: solid 1px #ddd;
 }
 
 .menuItem input {
@@ -41,42 +45,66 @@
   background: #fff;
   text-align: left;
   padding-left: 0.2rem;
-  margin:20rpx auto;
+  margin: 20rpx auto;
   border-radius: 20rpx;
-  box-shadow:2rpx 2rpx 2rpx #999
+  box-shadow: 2rpx 2rpx 2rpx #999;
 }
-.menuItem .uploader-text{
-  margin:20rpx auto;
-  border:solid 1px #ccc;
+
+.menuItem .uploader-text {
+  margin: 20rpx auto;
+  border: solid 1px #ccc;
   display: inline-block;
   padding: 10rpx 20rpx;
   background: #ddd;
-  box-shadow:2rpx 2rpx 2rpx #999;
-  border-radius: 20rpx
+  box-shadow: 2rpx 2rpx 2rpx #999;
+  border-radius: 20rpx;
 }
-.menuItem .contenteditableView{
-  margin:20rpx auto;
-  border:solid 1px #ccc;
+
+.menuItem .contenteditableView {
+  margin: 20rpx auto;
+  border: solid 1px #ccc;
   display: inline-block;
   padding: 10rpx 20rpx;
   background: #fff;
-  box-shadow:2rpx 2rpx 2rpx #999;
+  box-shadow: 2rpx 2rpx 2rpx #999;
   border-radius: 20rpx;
   width: 95%;
   height: 500rpx;
 }
-.menuItem .uploader-text:active{
-  background: #ccc
+
+.menuItem .uploader-text:active {
+  background: #ccc;
 }
+
 .menuItem textarea {
   width: 100%;
   display: inline-block;
-  border:solid 1rpx #999;
+  border: solid 1rpx #999;
   vertical-align: middle;
   background: #fff;
   text-align: left;
   padding-left: 0.2rem;
-  box-shadow:2rpx 2rpx 2rpx #999;
-  border-radius: 20rpx
+  box-shadow: 2rpx 2rpx 2rpx #999;
+  border-radius: 20rpx;
 }
-.uploader-image{width: 100%}
+
+.uploader-image {
+  width: 100%;
+  border: solid 2rpx #999;
+  border-radius: 20rpx;
+  box-shadow: 0 0 8rpx #999;
+  margin-bottom: 10rpx;
+}
+.uploader-container .imageWrap{position: relative}
+.uploader-container .imageWrap .delImage{
+  position: absolute;
+  height: 80rpx;
+  width: 80rpx;
+  right: 0;
+  top: 5rpx;
+  border-radius: 0 20rpx 0 100rpx;
+  background: rgba(255, 255, 255, 1);
+  text-align: right;
+  border-left: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+}

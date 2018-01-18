@@ -37,11 +37,21 @@
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
     <view class="uploader">
-      <view class="uploader-text" data-key='{{key}}' bindtap="doUpload">
+      <view class="uploader-text" data-key='{{key}}' data-max-length="{{maxLength||1}}" bindtap="doUpload">
         <text>上传图片</text>
       </view>
       <view class="uploader-container" wx:if="{{value}}">
-        <image class="uploader-image" src="{{value}}" data-imgurl="{{value}}" mode="widthFix" bindtap="previewImg"></image>
+        <view wx:if="{{!maxLength||maxLength===1}}">
+          <image class="uploader-image" src="{{value}}" data-imgurl="{{value}}" mode="widthFix" bindtap="previewImg"></image>
+        </view>
+        <view wx:else>
+          <view wx:for="{{value}}" wx:key="{{index}}" class='imageWrap'>
+            <view data-src="{{item}}" data-key='{{key}}' catchtap='btuDeleteImage' class='delImage'>
+              <icon size='20' type='cancel'></icon>
+            </view>
+            <image class="uploader-image" src="{{item}}" data-imgurl="{{item}}" mode="widthFix" bindtap="previewImg"></image>
+          </view>
+        </view>
       </view>
     </view>
   </view>
@@ -51,7 +61,8 @@
   <view class='menuSelectWrap'>
     <picker bindchange="pickerChange" data-key='{{key}}' value="{{chooseIndex}}" range="{{selectList}}" range-key="name">
       <view class="picker">
-        {{title}}：{{selectList[chooseIndex].name}}▼
+        {{title}}：
+        <text>{{selectList[chooseIndex].name}}▼</text>
       </view>
     </picker>
   </view>

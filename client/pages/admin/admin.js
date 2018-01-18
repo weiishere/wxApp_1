@@ -100,119 +100,11 @@ Page({
         {
           id: '114',
           name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
+          category: 4,
           image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
           price: '￥180',
           unit: '桶',
           remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '115',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-          desc: ''
-        },
-        {
-          id: '116',
-          name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
-          image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-          price: '￥180',
-          unit: '桶',
-          remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '117',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-          desc: ''
-        }, {
-          id: '118',
-          name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
-          image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-          price: '￥180',
-          unit: '桶',
-          remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '119',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-          desc: ''
-        },
-        {
-          id: '120',
-          name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
-          image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-          price: '￥180',
-          unit: '桶',
-          remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '121',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-          desc: ''
-        }, {
-          id: '122',
-          name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
-          image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-          price: '￥180',
-          unit: '桶',
-          remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '123',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-          desc: ''
-        },
-        {
-          id: '124',
-          name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-          categroy: 4,
-          image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-          price: '￥180',
-          unit: '桶',
-          remark: '德国原装进口，接受整箱订购：8*175',
-          desc: ''
-        },
-        {
-          id: '125',
-          name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-          categroy: 1,
-          image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-          price: '￥230',
-          unit: '桶',
-          remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
           desc: ''
         }
       ],
@@ -253,13 +145,16 @@ Page({
     const self = this;
     wx.showLoading('加载中...');
     const _showType = util.getObject(self.data.tabList, 'isActive', true);
-    Promise.all([this.getBannerList(), this.getMenuList()]).then(values => {
-      this.setData({
-        showType: _showType,
-        imgUrls: values[0].data,
-        menuList: values[1].data
+    this.getMenuList().then((data)=>{
+      Promise.all([this.getBannerList(), this.getGoodsList({ category: +data.data[0].id })]).then(values => {
+        this.setData({
+          showType: _showType,
+          imgUrls: values[0].data,
+          menuList: data.data,
+          goods: values[1]
+        });
+        wx.hideLoading();
       });
-      wx.hideLoading();
-    });
+    })
   }
 })

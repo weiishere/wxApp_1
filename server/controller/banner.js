@@ -18,7 +18,7 @@ async function insert(ctx, next) {
 
 async function list(ctx, next) {
     const { id } = ctx.query;
-    const result = id ? DB('banners').where('id', id) : DB('banners').select();
+    const result = DB('banners').where(ctx.query);
     await result.then(function (info) {
         ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
     }, function (e) {

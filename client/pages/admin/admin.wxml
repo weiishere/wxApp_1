@@ -43,13 +43,13 @@
     <view class='menuSelectWrap'>
       <picker bindchange="bindgoodsTypePickerChange" value="{{goods.chooseType}}" range="{{menuList}}" range-key="name">
         <view class="picker">
-          Menu类别：{{menuList[goods.chooseType].name}}▼
+          Menu类别：<text>{{menuList[goods.chooseType].name}}▼</text>
         </view>
       </picker>
     </view>
     <scroll-view scroll-y enable-back-to-top>
-      <view wx:for="{{goods.list}}" wx:key="{{item.id}}" class='menuItem goodsItem' bindtap='goEditGoods'>
-        <image src='{{item.image}}'></image>
+      <view wx:for="{{goods.list}}" wx:key="{{item.id}}" class='menuItem goodsItem' data-id="{{item.id}}" bindtap='goEditGoods'>
+        <image src='{{item.mainImage}}'></image>
         <text>{{item.name}}</text>
         <view data-id="{{item.id}}" catchtap='btuDeleteGoods'>
           <icon size='20' type='cancel'></icon>
