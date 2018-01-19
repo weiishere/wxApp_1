@@ -1,9 +1,9 @@
 /**
  * 小程序配置文件
  */
-var localHost = "http://localhost:5757";
+var host = "http://localhost:5757";
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://q0ymddaf.qcloud.la';
+//var host = 'https://q0ymddaf.qcloud.la';
 
 var config = {
   goodsApi: {

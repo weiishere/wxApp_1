@@ -14,7 +14,7 @@
 <template name="input">
   <view class="formItemWrapper" class='{{activeClass}}'>
     <text>{{title}}：</text>
-    <input type='text' value='{{value}}' data-key='{{key}}' bindinput="textInput" />
+    <input type='{{type||"text"}}' value='{{value}}' data-key='{{key}}' bindinput="textInput" />
   </view>
 </template>
 

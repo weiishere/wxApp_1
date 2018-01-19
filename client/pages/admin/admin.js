@@ -93,7 +93,7 @@ Page({
     goods: {
       pager: {
         thisPage: 1,
-        pagesize: 20,
+        pageSize: 5,
         recodeCount: 133
       },
       list: [
@@ -145,13 +145,24 @@ Page({
     const self = this;
     wx.showLoading('加载中...');
     const _showType = util.getObject(self.data.tabList, 'isActive', true);
-    this.getMenuList().then((data)=>{
-      Promise.all([this.getBannerList(), this.getGoodsList({ category: +data.data[0].id })]).then(values => {
+    this.getMenuList().then((data) => {
+      // let _item = util.getObject(data.data, 'id', data.data[0].id);
+      // let chooseIndex = data.data(_item);
+      this.setData({
+        menuList: data.data,
+      });
+      //如果有搜索的状态，优先加载搜索的数据
+      const query = this.data.goodsSearchStr ? { name: this.data.goodsSearchStr } : { category: +data.data[0].id };
+      Promise.all([this.getBannerList(), this.getGoodsList(query)]).then(values => {
+        self.goodsPager.init({ recordCount: values[1].recordCount });
         this.setData({
           showType: _showType,
           imgUrls: values[0].data,
-          menuList: data.data,
-          goods: values[1]
+          goods: {
+            pager: self.goodsPager,
+            list: values[1].list,
+            chooseType: values[1].chooseType
+          }
         });
         wx.hideLoading();
       });

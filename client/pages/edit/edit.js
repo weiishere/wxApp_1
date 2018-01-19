@@ -86,24 +86,15 @@ Page({
           title: '类别特征',
           selectList: [
             { value: 'category', name: 'category(用于产品类型)' },
-            { value: 'custom', name: 'custom(非强类别，自定义标签)' },
+            { value: 'all', name: 'all(全部商品，按照最新更新时间排列)' },
+            { value: 'recommend', name: 'recommend(推荐列表)' },
             { value: 'hide', name: 'hide(隐藏菜单)' }
           ],
-          changeBack: function (fromList) {
-            fromList[3].visible = (this.value !== 'custom');
-          },
+          changeBack: function (fromList) { },
           chooseIndex: 0,
           value: item ? item.type : 'category'
-        },
-        {
-          template: 'input',
-          key: 'name',
-          title: '标签名称',
-          value: item && item.tag,
-          visible: item ? item.type !== 'custom' : true
-        },
+        }
       ]
-      console.log(result);
       //处理选择器picker的显示Index，因为只是处理了value还不够，虽然不影响功能，但是下拉初始显示可能不正确
       if (item) {
         let _item = util.getObject(result, 'key', 'type');
@@ -128,7 +119,7 @@ Page({
 
     let initData = (item) => {
       //获取并初始化menu列表
-      this.getMenuList({ type: 'category' }).then((data) => {
+      this.getMenuList().then((data) => {
         let _menuList = util.getObject(this.data.fromsList, "key", 'category');
         data.data.forEach((item) => {
           _menuList.selectList.push({ value: item.id, name: item.name });
@@ -162,6 +153,13 @@ Page({
           key: 'remark',
           title: '备注',
           value: item && item.remark
+        },
+        {
+          template: 'input',
+          key: 'recommend',
+          type: 'number',
+          title: '推荐值(值越大越靠前)',
+          value: item && item.recommend
         },
         {
           template: 'input',
@@ -200,7 +198,7 @@ Page({
           activeClass: 'imageUploadWrapper',
           title: '图片介绍(最多5张)',
           maxLength: 5,
-          value: item && item.introImage.split(',')
+          value: item && (item.introImage ? (item.introImage.split(',')) : '')
         },
         {
           template: 'freeText',

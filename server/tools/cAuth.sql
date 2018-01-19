@@ -32,7 +32,7 @@ CREATE TABLE `banners` (
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='banner信息';
 
 DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `benu` (
+CREATE TABLE `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
   `icon` varchar(20) NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE `benu` (
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Menu信息';
-insert into `menu` (`name`,`icon`) values 
-('店主推荐', 'home'),('最新上架', 'new'),('护肤美妆', 'brand-makeup'),
+insert into `menu` (`name`,`icon`,`type`) values 
+('店主推荐', 'home','recommend'),('最新上架', 'new','all'),('护肤美妆', 'brand-makeup'),
 ('首饰精品', 'jewelry'),('母婴喂养', 'baby1'),('其他精品', 'Recommend');
 
 DROP TABLE IF EXISTS `goods`;
@@ -55,6 +55,8 @@ CREATE TABLE `goods` (
   `discount` FLOAT NOT NULL DEFAULT 1,
   `unit` varchar(50) NOT NULL,
   `remark` varchar(800) NULL,
+  `recommend` int NOT NULL DEFAULT 0,
+  `click` init NULL DEFAULT 0,
   `storage` varchar(50) NULL,
   `introImage`  varchar(1000) NULL,
   `introduction`  text NULL,

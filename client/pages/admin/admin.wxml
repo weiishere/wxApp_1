@@ -28,7 +28,9 @@
   <view class='manWrapper {{showType.code==="menu"?"":"hide"}}'>
     <scroll-view scroll-y enable-back-to-top>
       <view wx:for="{{menuList}}" wx:key="{{item.id}}" class='menuItem' data-id="{{item.id}}" bindtap='goEditMenu'>
-        <i class='icon-{{item.icon}}'></i><text>{{item.name}}</text><text class='typeText'>类型：({{item.type}})</text>
+        <i class='icon-{{item.icon}}'></i>
+        <text>{{item.name}}</text>
+        <text class='typeText'>类型：({{item.type}})</text>
         <view data-id="{{item.id}}" catchtap='btuDeleteMenu'>
           <icon size='20' type='cancel'></icon>
         </view>
@@ -43,9 +45,14 @@
     <view class='menuSelectWrap'>
       <picker bindchange="bindgoodsTypePickerChange" value="{{goods.chooseType}}" range="{{menuList}}" range-key="name">
         <view class="picker">
-          Menu类别：<text>{{menuList[goods.chooseType].name}}▼</text>
+          Menu类别：
+          <text>{{menuList[goods.chooseType].name}}▼</text>
         </view>
       </picker>
+      <view>
+        <input type="text" maxlength='30' placeholder="名称搜索" bindinput="searchTextInput" value="{{goodsSearchStr}}"/>
+        <button catchtap="searchgoods">搜索</button>
+      </view>
     </view>
     <scroll-view scroll-y enable-back-to-top>
       <view wx:for="{{goods.list}}" wx:key="{{item.id}}" class='menuItem goodsItem' data-id="{{item.id}}" bindtap='goEditGoods'>
@@ -57,9 +64,11 @@
       </view>
     </scroll-view>
     <view class='pagerWrapper'>
-      <button>◀</button>
-      <text>第1/22页（共425条）</text>
-      <button>▶</button>
+      <button catchtap="getGoodsByPage" data-order='first'>首页</button>
+      <button catchtap="getGoodsByPage" data-order='previous'>〈</button>
+      <text>第{{goods.pager.thisPage}}/{{goods.pager.pageCount}}页（共{{goods.pager.recordCount}}条）</text>
+      <button catchtap="getGoodsByPage" data-order='next'>〉</button>
+      <button catchtap="getGoodsByPage" data-order='end'>尾页</button>
     </view>
     <view class='bottomBtu'>
       <button type="default" hover-class="button-hover" bindtap='goAddGoods'>新增</button>
@@ -74,7 +83,7 @@
       </view>
       <view class='formItemWrapper'>
         <text>头部色调:</text>
-        <input type='text' value='{{config.themeColor}}'/>
+        <input type='text' value='{{config.themeColor}}' />
       </view>
       <view class='formItemWrapper'>
         <text>欢迎语:</text>
@@ -86,4 +95,3 @@
     </view>
   </view>
 </view>
-
