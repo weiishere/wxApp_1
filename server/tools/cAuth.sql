@@ -114,3 +114,12 @@ CREATE TABLE `message` (
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='留言表';
+
+
+insert into tag (`name`) value('美妆口红');
+insert into tag (`name`) value('精华美肤');
+insert into tag (`name`) value('羊奶粉');
+insert into tag (`name`) value('施华洛世奇');
+
+insert into goods2tag (`goodsId`,`tagId`) value(4,1);
+insert into goods2tag (`goodsId`,`tagId`) value(4,2);
