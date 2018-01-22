@@ -3,7 +3,7 @@ var config = require('../../config');
 const goodsManager = require('../admin/goods.js');
 const bannerManager = require('../admin/banner.js');
 const menuManager = require('../admin/menu.js');
-
+const tagManager = require('../admin/tag.js');
 //const Towxml = require('../../utils/towxml/main');
 
 
@@ -20,11 +20,15 @@ Page({
       }
     ],
     activeItem: {},
-    buttonName: '提交'
+    buttonName: '提交',
+    tagViewShow: false,
+    tagList: [],
+    tagAddStr: ""
   },
   ...goodsManager,
   ...bannerManager,
   ...menuManager,
+  ...tagManager,
   initBannerView: function (param) {
     // const towxml = new Towxml();
     // let data = towxml.toJson('<s>sdddddddfff</s>', 'markdown');
@@ -116,10 +120,10 @@ Page({
     });
   },
   initGoodsView: function (param) {
-
     let initData = (item) => {
-      //获取并初始化menu列表
-      this.getMenuList().then((data) => {
+      //获取并初始化menu列表Ks
+      Promise.all([this.getMenuList(), this.getTagsByGoodsId(item.id)]).then((value) => {
+        const data = value[0];
         let _menuList = util.getObject(this.data.fromsList, "key", 'category');
         data.data.forEach((item) => {
           _menuList.selectList.push({ value: item.id, name: item.name });
@@ -130,6 +134,8 @@ Page({
         } else {
           _menuList.value = _menuList.selectList[0].value
         }
+        let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
+        _tagList.value = value[1].data;
         this.setData({
           fromsList: this.data.fromsList
         });
@@ -160,6 +166,14 @@ Page({
           type: 'number',
           title: '推荐值(值越大越靠前)',
           value: item && item.recommend
+        },
+        {
+          template: 'trigger',
+          key: 'tagSet',
+          title: '产品标签(搜索关键字/特征)',
+          showDesc: '标签设置',
+          activeClass: 'tagChooseButton',
+          value: []
         },
         {
           template: 'input',
@@ -198,7 +212,7 @@ Page({
           activeClass: 'imageUploadWrapper',
           title: '图片介绍(最多5张)',
           maxLength: 5,
-          value: item && (item.introImage ? (item.introImage.split(',')) : '')
+          value: item && (item.introImage ? (item.introImage.split(',')) : [])
         },
         {
           template: 'freeText',
@@ -310,6 +324,54 @@ Page({
       }
     })
   },
+  trigger: function (e) {
+    const self = this;
+    self.data.activeItem = util.getObject(self.data.fromsList, "key", e.currentTarget.dataset.key);
+    if (e.currentTarget.dataset.key === 'tagSet') {
+      if (self.data.tagList.length === 0) {
+        this.getTagsList({}).then((data) => {
+          data.data.forEach((item) => {
+            self.data.activeItem.value.forEach((item2) => {
+              if (item.id === item2.id) {
+                item.active = true;
+              }
+            })
+          });
+          self.data.activeItem.value = data.data;
+          self.setData({
+            tagViewShow: true,
+            tagList: data.data
+          });
+        });
+      } else {
+        self.setData({
+          tagViewShow: true
+        });
+      }
+    }
+  },
+  tagTextInput: function (e) {
+    this.setData({
+      tagAddStr: e.detail.value
+    });
+  },
+  tagSubmit: function (e) {
+    const type = e.currentTarget.dataset.type;
+    let chooseTag = [];
+    if (type === 'submit') {
+      this.data.tagList.forEach((item) => {
+        if (item.active) {
+          chooseTag.push(item);
+        }
+      });
+    }
+    let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
+    _tagList.value = chooseTag;
+    this.setData({
+      tagViewShow: false,
+      fromsList: this.data.fromsList
+    });
+  },
   btuDeleteImage: function (e) {
     const self = this;
     wx.showModal({
@@ -330,6 +392,11 @@ Page({
 
   },
   submit: function () {
+    // this.data.fromsList.forEach((item) => {
+    //   if (item.template === 'trigger') {
+
+    //   }
+    // });
     if (this.data.action === 'add') {
       switch (this.data.mode) {
         case 'banner':

@@ -14,7 +14,7 @@ module.exports = {
             list: res.list,
             chooseType: e.detail.value,
           },
-          goodsSearchStr:''
+          goodsSearchStr: ''
         });
     });
   },
@@ -43,11 +43,15 @@ module.exports = {
         url: config.goodsApi.list,
         data: param,
         success: function (res) {
-          resolve({
-            list: res.data.data.list,
-            recordCount: res.data.data.recordCount,
-            chooseType: chooseIndex
-          });
+          if (res.data.code === '00001') {
+            resolve({
+              list: res.data.data.list,
+              recordCount: res.data.data.recordCount,
+              chooseType: chooseIndex
+            });
+          } else {
+            reject();
+          }
         },
         fail: function () {
           wx.showToast({ title: "请求错误~" })
@@ -69,6 +73,8 @@ module.exports = {
             chooseType: this.data.goods.chooseType
           }
         });
+    }, () => {
+      this.goodsPager.back();
     });
   },
   searchTextInput: function (e) {
@@ -77,7 +83,7 @@ module.exports = {
     });
   },
   searchgoods: function () {
-    this.getGoodsList({ name:this.data.goodsSearchStr }).then((res) => {
+    this.getGoodsList({ name: this.data.goodsSearchStr }).then((res) => {
       this.goodsPager.init({ recordCount: res.recordCount });
       this.setData(
         {
@@ -92,7 +98,11 @@ module.exports = {
   addGoods: function (fromsList) {
     const postData = {};
     fromsList.forEach(item => {
-      postData[item.key] = item.value;
+      if (key === 'tagSet') {
+        //标签设置
+      } else {
+        postData[item.key] = item.value;
+      }
     });
     postData.introImage = postData.introImage && postData.introImage.join(',');
     util.singleRequest({
@@ -102,8 +112,18 @@ module.exports = {
   },
   updateGoods: function (fromsList) {
     const postData = {};
+    const self = this;
     fromsList.forEach(item => {
-      postData[item.key] = item.value;
+      
+      if (item.key === 'tagSet') {
+        //标签设置
+        let tags = [];
+
+        item.value.forEach(tag => tags.push(tag.id));
+        self.updateGoods2Tag(postData.id, tags);
+      } else {
+        postData[item.key] = item.value;
+      }
     });
     postData.introImage = postData.introImage.join(',');
     util.singleRequest({

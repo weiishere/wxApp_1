@@ -34,7 +34,7 @@ async function list(ctx, next) {
     } else {
         //查询单个数据才给出详情，列表不给
         let result = name ? DB('goods').where('name', 'like', '%' + escape(name) + '%') : DB('goods');
-        let result2 = DB('goods').select('id', 'name', 'category', 'mainImage', 'price', 'discount', 'unit', 'remark', 'recommend', 'storage', 'status','createDate');
+        let result2 = DB('goods').select('id', 'name', 'category', 'mainImage', 'price', 'discount', 'unit', 'remark', 'recommend', 'storage', 'status', 'createDate');
         if (name) {
             result2 = result2.where('name', 'like', '%' + escape(name) + '%');
         }
@@ -113,7 +113,7 @@ async function updateClick(ctx, next) {
         ctx.state = { code: httpCode.paramNullCode, data: 'id参数为空', stateCode: httpCode.paramNullCode };
         return next();
     }
-    await DB.raw('UPDATE goods SET click = click + 1 WHERE id = 1').then(function (info) {
+    await DB.raw('UPDATE goods SET click = click + 1 WHERE id = ' + id).then(function (info) {
         ctx.state = { code: httpCode.successCode, data: 'success', stateCode: httpCode.successCode };
     }, function (e) {
         ctx.state = { code: e.sqlState, data: e.sqlMessage, stateCode: httpCode.sqlErrorCode };

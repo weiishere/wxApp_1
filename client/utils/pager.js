@@ -12,6 +12,7 @@ module.exports = class Pager {
     }
     go(order) {
         let result = false;
+        this.thisPageCopy = this.thisPage;
         if (typeof (order) === 'number') {
             if (this.pageCount >= order) {
                 this.thisPage = order;
@@ -29,17 +30,21 @@ module.exports = class Pager {
             }
         }
         else if (order === 'first') {
-            if (this.thisPage !== 1) { 
+            if (this.thisPage !== 1) {
                 this.thisPage = 1;
-                result = true; 
+                result = true;
             }
-            
+
         } else if (order === 'end') {
-            if (this.thisPage !== this.pageCount) { 
+            if (this.thisPage !== this.pageCount) {
                 this.thisPage = this.pageCount;
-                result = true; 
+                result = true;
             }
         }
         return result;
+    }
+    back() {
+        this.thisPage = this.thisPageCopy;
+        return true;
     }
 }

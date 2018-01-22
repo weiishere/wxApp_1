@@ -24,6 +24,16 @@ var config = {
     remove: `${host}/weapp/menu/remove`,
     update: `${host}/weapp/menu/update`
   },
+  tagApi:{
+    list: `${host}/weapp/tag/list`,
+    insert: `${host}/weapp/tag/insert`,
+    remove: `${host}/weapp/tag/remove`,
+    update: `${host}/weapp/tag/update`
+  },
+  goods2tagApi:{
+    list: `${host}/weapp/goods2tag/list`,
+    update: `${host}/weapp/goods2tag/update`
+  },
   // 下面的地址配合云端 Demo 工作
   service: {
     host,

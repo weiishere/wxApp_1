@@ -8,7 +8,11 @@ module.exports = {
         url: config.menuApi.list,
         data: param || {},
         success: function (res) {
-          resolve(res.data);
+          if (res.data.code === '00001') {
+            resolve(res.data);
+          } else {
+            reject && reject();
+          }
         },
         fail: function () {
           wx.showToast({ title: "请求错误~" })
@@ -69,8 +73,8 @@ module.exports = {
       url: '../edit/edit?mode=menu&action=edit&key=' + id
     })
   },
-  
-  goAddMenu:function(){
+
+  goAddMenu: function () {
     wx.navigateTo({
       url: '../edit/edit?mode=menu&action=add'
     });

@@ -41,9 +41,6 @@ CREATE TABLE `menu` (
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Menu信息';
-insert into `menu` (`name`,`icon`,`type`) values 
-('店主推荐', 'home','recommend'),('最新上架', 'new','all'),('护肤美妆', 'brand-makeup'),
-('首饰精品', 'jewelry'),('母婴喂养', 'baby1'),('其他精品', 'Recommend');
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -66,3 +63,54 @@ CREATE TABLE `goods` (
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='商品信息';
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE `config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) NOT NULL DEFAULT 0,
+  `key` varchar(100) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `value` varchar(200) NOT NULL DEFAULT 0,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='配置信息表';
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `click` int NOT NULL DEFAULT 0,
+  `type` int NOT NULL DEFAULT 1,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tag信息';
+
+DROP TABLE IF EXISTS `goods2tag`;
+CREATE TABLE `goods2tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `goodsId` int(11) NOT NULL,
+  `tagId` int(11) NOT NULL,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tag/Goods级联表信息';
+
+DROP TABLE IF EXISTS `like`;
+CREATE TABLE `like` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `goodsId` int(11) NOT NULL,
+  `open_id` varchar(100) NOT NULL,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='喜欢收藏表';
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `open_id` varchar(100) NOT NULL,
+  `content` varchar(200) NOT NULL,
+  `agree` int NOT NULL DEFAULT 0,
+  `type`  int NOT NULL DEFAULT 1,
+  `belongId` int(11) NOT NULL DEFAULT 0,
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) 
+)ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='留言表';
