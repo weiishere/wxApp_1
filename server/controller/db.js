@@ -1,4 +1,4 @@
-const { mysql_local: config } = require('../config')
+const { mysql: config } = require('../config')
 
 
 const DB = require('knex')({

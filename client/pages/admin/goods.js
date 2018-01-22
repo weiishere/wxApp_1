@@ -2,7 +2,7 @@ const util = require('../../utils/util.js');
 var config = require('../../config');
 const Pager = require('../../utils/pager.js');
 module.exports = {
-  goodsPager: new Pager({ pageSize: 7 }),
+  goodsPager: new Pager({ pageSize: 10 }),
   bindgoodsTypePickerChange: function (e) {
     //console.log('picker发送选择改变，携带值为', this.data.menuList[+e.detail.value].id);
     this.getGoodsList({ category: +this.data.menuList[+e.detail.value].id }).then((res) => {

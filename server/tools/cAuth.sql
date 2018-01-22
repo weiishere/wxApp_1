@@ -53,7 +53,7 @@ CREATE TABLE `goods` (
   `unit` varchar(50) NOT NULL,
   `remark` varchar(800) NULL,
   `recommend` int NOT NULL DEFAULT 0,
-  `click` init NULL DEFAULT 0,
+  `click` int NULL DEFAULT 0,
   `storage` varchar(50) NULL,
   `introImage`  varchar(1000) NULL,
   `introduction`  text NULL,

@@ -168,7 +168,7 @@
     display: inline-block;
     border: solid 1px #ccc;
     padding: 20rpx 20rpx 20rpx 60rpx;
-    margin: 30rpx;
+    margin: 10rpx;
     border-radius: 10rpx;
     background: #fff;
     position: relative

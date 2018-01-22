@@ -90,7 +90,7 @@ Page({
           title: '类别特征',
           selectList: [
             { value: 'category', name: 'category(用于产品类型)' },
-            { value: 'all', name: 'all(全部商品，按照最新更新时间排列)' },
+            { value: 'all', name: 'all(按照最新更新时间排列)' },
             { value: 'recommend', name: 'recommend(推荐列表)' },
             { value: 'hide', name: 'hide(隐藏菜单)' }
           ],
@@ -122,7 +122,7 @@ Page({
   initGoodsView: function (param) {
     let initData = (item) => {
       //获取并初始化menu列表Ks
-      Promise.all([this.getMenuList(), this.getTagsByGoodsId(item.id)]).then((value) => {
+      Promise.all([this.getMenuList(), this.getTagsByGoodsId(item ? item.id : 0)]).then((value) => {
         const data = value[0];
         let _menuList = util.getObject(this.data.fromsList, "key", 'category');
         data.data.forEach((item) => {
@@ -131,11 +131,12 @@ Page({
         if (item) {
           //处理类别下拉选项
           _menuList.chooseIndex = +_menuList.selectList.indexOf(util.getObject(_menuList.selectList, 'value', +item.category));
+          let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
+          _tagList.value = value[1].data;
         } else {
           _menuList.value = _menuList.selectList[0].value
         }
-        let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
-        _tagList.value = value[1].data;
+
         this.setData({
           fromsList: this.data.fromsList
         });
@@ -364,13 +365,18 @@ Page({
           chooseTag.push(item);
         }
       });
+      let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
+      _tagList.value = chooseTag;
+      this.setData({
+        tagViewShow: false,
+        fromsList: this.data.fromsList
+      });
+    } else {
+      this.setData({
+        tagViewShow: false
+      });
     }
-    let _tagList = util.getObject(this.data.fromsList, "key", 'tagSet');
-    _tagList.value = chooseTag;
-    this.setData({
-      tagViewShow: false,
-      fromsList: this.data.fromsList
-    });
+
   },
   btuDeleteImage: function (e) {
     const self = this;
