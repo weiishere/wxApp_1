@@ -12,8 +12,16 @@
   <!-- <view class='header'>
     <text>{{showMenu.name}}</text>
   </view> -->
+  <view class="searchBar">
+    <view>
+      <text>发现更多...</text>
+      <view>
+        <i class='icon-search'></i>
+      </view>
+    </view>
+  </view>
   <view class='mainWrapper'>
-    <scroll-view class='sideBar'>
+    <scroll-view class='sideBar' scroll-y>
       <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" data-id="{{item.menuId}}" bindtap="chooseMenu">
         <template is="menuItem" data="{{...item}}" />
       </view>
@@ -23,6 +31,32 @@
         <template is="goodsItem" data="{{...item}}" />
       </view>
     </scroll-view>
+  </view>
+  <view class="footer">
+    <view data-key='home' class="{{activeTab=='home'&&'active'}}" catchtap='footerChange'>
+      <view>
+        <i class="icon-home1"></i>
+      </view>
+      <text>首页</text>
+    </view>
+    <view data-key='message' class="{{activeTab==='message'?'active':''}}" catchtap='footerChange'>
+      <view>
+        <i class="icon-message"></i>
+      </view>
+      <text>留言墙</text>
+    </view>
+    <view data-key='like' class="{{activeTab==='like'?'active':''}}" catchtap='footerChange'>
+      <view>
+        <i class="icon-star"></i>
+      </view>
+      <text>收藏</text>
+    </view>
+    <view data-key='about' class="{{activeTab==='about'?'active':''}}" catchtap='footerChange'>
+      <view>
+        <i class="icon-about"></i>
+      </view>
+      <text>关于</text>
+    </view>
   </view>
 </view>
 

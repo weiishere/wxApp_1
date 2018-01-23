@@ -14,7 +14,7 @@ Page({
         menuId: 2,
         name: '最新上架',
         icon: 'new',
-        
+
       },
       {
         menuId: 3,
@@ -116,7 +116,8 @@ Page({
     sliderSet: {
       autoplay: true,
       circular: true
-    }
+    },
+    activeTab: 'home'
   },
   getActiveMenu: function () {
     let _item;
@@ -151,6 +152,11 @@ Page({
   bindViewTap: function () {
     wx.navigateTo({
       url: '../details/details'
+    })
+  },
+  footerChange: function (event) {
+    this.setData({
+      activeTab: event.currentTarget.dataset.key
     })
   },
   onLoad: function () {
