@@ -1,11 +1,22 @@
 /* pages/home/home.wxss */
 
+@import "../search/search.wxss";
+.container {
+    overflow: hidden
+}
+
+.container-main {
+    flex: 1;
+    height: 100%;
+    overflow: hidden
+}
+
 .container-home {
     height: 100%;
     box-sizing: border-box;
     flex-direction: column;
     display: flex;
-    
+    overflow: hidden
 }
 
 .header {
@@ -46,7 +57,7 @@
 
 .searchBar text {
     float: left;
-    margin-left:15rpx;
+    margin-left: 15rpx;
     color: #999;
     line-height: 190%;
 }
@@ -227,7 +238,6 @@
 .footer {
     width: 100%;
     height: 100rpx;
-    
     border-top: solid 1px #ccc;
     display: flex;
     color: #fff;
@@ -240,7 +250,6 @@
     text-align: center;
     flex: 1;
     background: #9B1888;
-    
 }
 
 .footer>view.active {
@@ -251,19 +260,17 @@
 
 .footer>view.active view {
     /* margin-top: 18rpx; */
-    -webkit-transform:translate3d(0,20rpx,0);
+    -webkit-transform: translate3d(0, 20rpx, 0);
 }
 
 .footer>view text {
-  -webkit-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
     opacity: 1;
     font-size: 28rpx;
     line-height: 45rpx
 }
 
-.footer>view i {
-    
-}
+.footer>view i {}
 
 .footer>view.active text {
     opacity: 0
@@ -275,7 +282,7 @@
 }
 
 .footer>view view {
-  -webkit-transform:translate3d(0,6rpx,0);
+    -webkit-transform: translate3d(0, 6rpx, 0);
     -webkit-transition: all 0.2s linear;
 }
 

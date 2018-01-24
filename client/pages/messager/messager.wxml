@@ -1,0 +1,3 @@
+<view class="container-main {{activeTab!=='messager'&&'hide'}}">
+    留言墙
+</view>

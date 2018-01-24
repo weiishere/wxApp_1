@@ -1,13 +1,13 @@
 Array.prototype.indexOf = function (val) {
   for (var i = 0; i < this.length; i++) {
-      if (this[i] == val) return i;
+    if (this[i] == val) return i;
   }
   return -1;
 }
 Array.prototype.remove = function (val) {
   var index = this.indexOf(val);
   if (index > -1) {
-      this.splice(index, 1);
+    this.splice(index, 1);
   }
 }
 
@@ -112,4 +112,28 @@ var singleRequest = function ({ url, postData, success, error, fail, complete })
     }
   });
 }
-module.exports = { formatTime, showBusy, showSuccess, showModel, getObject, getItemDataByServer, singleRequest }
+var clone = function (obj) {
+  var copy;
+  if (null == obj || "object" != typeof obj) return obj;
+  if (obj instanceof Date) {
+    copy = new Date();
+    copy.setTime(obj.getTime());
+    return copy;
+  }
+  if (obj instanceof Array) {
+    copy = [];
+    for (var i = 0, len = obj.length; i < len; i++) {
+      copy[i] = clone(obj[i]);
+    }
+    return copy;
+  }
+  if (obj instanceof Object) {
+    copy = {};
+    for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+    }
+    return copy;
+  }
+  throw new Error("Unable to copy obj! Its type isn't supported.");
+}
+module.exports = { formatTime, showBusy, showSuccess, showModel, getObject, getItemDataByServer, singleRequest,clone }

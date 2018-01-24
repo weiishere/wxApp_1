@@ -9,6 +9,9 @@
 .hide {
   display: none !important;
 }
+.show {
+  display: block !important;
+}
 
 page {
   font-size: 30rpx;

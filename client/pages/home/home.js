@@ -1,4 +1,6 @@
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const searchManager = require('../search/search.js');
+const tagManager = require('../admin/tag.js');
 
 Page({
   data: {
@@ -113,12 +115,18 @@ Page({
         title: '2018新年快乐，迪奥为您呈现'
       }
     ],
+    tagList: [],
+    tagList_copy: [],
     sliderSet: {
       autoplay: true,
       circular: true
     },
-    activeTab: 'home'
+    activeTab: 'home',
+    searchVislble: false,
+    isIn: false,
   },
+  ...searchManager,
+  ...tagManager,
   getActiveMenu: function () {
     let _item;
     this.data.menuList.forEach((item) => {
@@ -149,6 +157,30 @@ Page({
       showGoodList: this.getActiveGoodsList(chooseMenu)
     })
   },
+  goSearch: function () {
+    this.setData({
+      searchVislble: true
+    });
+    setTimeout(() => {
+      this.setData({
+        isIn: true
+      });
+    }, 10);
+    setTimeout(() => {
+      if (this.data.tagList_copy.length === 0) {
+        this.getTagsList({}).then((data) => {
+          this.data.tagList_copy = data.data;
+          this.setData({
+            tagList: data.data
+          });
+        });
+      } else {
+        this.setData({
+          tagList: util.clone(this.data.tagList_copy)
+        });
+      }
+    }, 400);
+  },
   bindViewTap: function () {
     wx.navigateTo({
       url: '../details/details'
@@ -156,8 +188,15 @@ Page({
   },
   footerChange: function (event) {
     this.setData({
-      activeTab: event.currentTarget.dataset.key
-    })
+      activeTab: event.currentTarget.dataset.key,
+      isIn: false
+    });
+    setTimeout(() => {
+      this.setData({
+        searchVislble: false,
+        tagList: []
+      });
+    }, 400);
   },
   onLoad: function () {
     const menu = this.getActiveMenu();
@@ -168,4 +207,4 @@ Page({
       showMenu: menu
     })
   }
-})
+});
