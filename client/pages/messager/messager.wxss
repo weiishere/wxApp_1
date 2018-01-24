@@ -1,55 +1,76 @@
 page {
-    perspective: 800rpx;
-    transform-style: preserve-3d;
+  perspective: 800rpx;
+  transform-style: preserve-3d;
 }
 
-.messageContainer {}
+.messageContainer {
+}
 
 .addMsgWrapper {
-    position: absolute;
-    z-index: 10;
-    bottom: 160rpx;
-    left: 50rpx;
-    height: 80rpx;
-    min-width: 80rpx;
-    border: solid 1px #999;
-    border-radius: 40rpx;
-    text-align: center;
-    background: #eee;
-    box-shadow: 2rpx 2rpx 2rpx #666;
-    overflow: hidden
+  position: absolute;
+  z-index: 10;
+  bottom: 160rpx;
+  left: 50rpx;
+  height: 80rpx;
+  min-width: 80rpx;
+  border: solid 1px #999;
+  border-radius: 40rpx;
+  text-align: center;
+  background: #eee;
+  box-shadow: 2rpx 2rpx 2rpx #666;
+  overflow: hidden;
 }
-
 
 .addMsgWrapper i {
-    font-family: "iconfont";
-    font-size: 50rpx;
-    line-height: 80rpx;
-    vertical-align: middle;
-    padding: 0 15rpx;
-    float: left;
-}
-.addMsgWrapper i:active{
-    font-weight: bold
+  font-family: "iconfont";
+  font-size: 50rpx;
+  line-height: 80rpx;
+  vertical-align: middle;
+  padding: 0 15rpx;
+  float: left;
 }
 
-.addMsgWrapper view{
-    display: inline-block;
-    width: 0rpx;
-    overflow:hidden;
-    vertical-align: middle;
-    -webkit-transition: all .2s ease-out;
+.addMsgWrapper i:active {
+  font-weight: bold;
 }
-.addMsgWrapper view.active{
-    width: 480rpx;
+
+.addMsgWrapper view {
+  display: inline-block;
+  width: 0rpx;
+  overflow: hidden;
+  vertical-align: middle;
+  -webkit-transition: all 0.2s ease-out;
 }
-.addMsgWrapper input{
-    vertical-align: middle;
-    height: 80rpx;
-    float: left;
-    border-left: solid 1px #999;
-    border-right: solid 1px #999;
-    background: #fff;
-    text-align: left;
-    width: 380rpx
+
+.addMsgWrapper view.active {
+  width: 480rpx;
+}
+
+.addMsgWrapper input {
+  vertical-align: middle;
+  height: 80rpx;
+  float: left;
+  border-left: solid 1px #999;
+  border-right: solid 1px #999;
+  background: #fff;
+  text-align: left;
+  width: 380rpx;
+}
+
+.msgItemWrap {
+  float: left;
+  width: 25%;
+  height: 200rpx;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  text-align: center
+}
+.msgItemWrap text{
+width: 90%;
+height: 90%;
+background: #FAFEC0;
+display: block;
+margin: 0 auto;
+box-shadow: 2rpx 2rpx 10rpx #333;
+-webkit-mask: -webkit-gradient(linear, top bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
 }
