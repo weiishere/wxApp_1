@@ -1,6 +1,7 @@
 const util = require('../../utils/util.js');
 const searchManager = require('../search/search.js');
 const tagManager = require('../admin/tag.js');
+const messagerManager = require('../messager/messager.js');
 
 Page({
   data: {
@@ -124,8 +125,11 @@ Page({
     activeTab: 'home',
     searchVislble: false,
     isIn: false,
+    ...searchManager.data,
+    ...messagerManager.data
   },
-  ...searchManager,
+  ...searchManager.handler,
+  ...messagerManager.handler,
   ...tagManager,
   getActiveMenu: function () {
     let _item;

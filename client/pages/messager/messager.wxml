@@ -1,3 +1,9 @@
-<view class="container-main {{activeTab!=='messager'&&'hide'}}">
-    留言墙
+<view class="container-main messageContainer {{activeTab!=='messager'&&'hide'}}">
+    <view class='addMsgWrapper'>
+        <i class="icon-addmessage" bindtap='showMsgInput'></i>
+        <view class="{{addMsgHide&&'active'}}">
+            <input type="text" placeholder="在此输入新留言" />
+            <i class="icon-shortcut"></i>
+        </view>
+    </view>
 </view>

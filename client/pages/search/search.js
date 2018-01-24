@@ -1,19 +1,24 @@
 const util = require('../../utils/util.js');
-var config = require('../../config');
 
 module.exports = {
-    searchOrder: function (event) {
-        const order = event.currentTarget.dataset.order;
-        if (order === 'back') {
-            this.setData({
-                isIn: false
-            });
-            setTimeout(() => {
+    data: {
+        searchVislble: false,
+        isIn: false
+    },
+    handler: {
+        searchOrder: function (event) {
+            const order = event.currentTarget.dataset.order;
+            if (order === 'back') {
                 this.setData({
-                    searchVislble: false,
-                    tagList: []
+                    isIn: false
                 });
-            }, 400);
+                setTimeout(() => {
+                    this.setData({
+                        searchVislble: false,
+                        tagList: []
+                    });
+                }, 400);
+            }
         }
     }
 }

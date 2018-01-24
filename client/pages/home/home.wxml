@@ -39,6 +39,8 @@
         </view>
   </view>
   <include src="../messager/messager.wxml" />
+  <include src="../like/like.wxml" />
+  <include src="../about/about.wxml" />
   <include src="../search/search.wxml" />
   <view class="footer">
       <view data-key='home' class="{{activeTab=='home'&&'active'}}" catchtap='footerChange'>

@@ -1,0 +1,3 @@
+<view class="container-main aboutContainer {{activeTab!=='about'&&'hide'}}">
+    关于我们
+</view>

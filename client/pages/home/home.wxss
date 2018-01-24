@@ -1,6 +1,5 @@
 /* pages/home/home.wxss */
 
-@import "../search/search.wxss";
 .container {
     overflow: hidden
 }
@@ -264,7 +263,7 @@
 }
 
 .footer>view text {
-    -webkit-transition: all .2s ease-out;
+    -webkit-transition: all .3s ease-out;
     opacity: 1;
     font-size: 28rpx;
     line-height: 45rpx
@@ -291,6 +290,10 @@
     font-size: 40rpx;
 }
 
+@import "../search/search.wxss";
+@import "../messager/messager.wxss";
+@import "../like/like.wxss";
+@import "../about/about.wxss";
 
 /*动画区*/
 
