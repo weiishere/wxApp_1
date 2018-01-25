@@ -2,13 +2,13 @@ const { DB } = require('./db');
 const httpCode = require('../utils/httpCode');
 
 async function insert(ctx, next) {
-    const { open_id, content, belongId } = ctx.request.body;
+    const { open_id, content, hideName } = ctx.request.body;
     await DB('message')
         .returning('id')
         .insert({
             open_id: open_id,
             content: content,
-            belongId: belongId
+            hideName: hideName
         }).then(function (info) {
             ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
         }, function (e) {
@@ -17,13 +17,19 @@ async function insert(ctx, next) {
 }
 
 async function list(ctx, next) {
-    const { open_id, belongId } = ctx.query;
-    const result = DB('message').where(ctx.query);
-    await result.then(function (info) {
-        ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
+    const { thisPage, pageSize } = ctx.query;
+    let result = DB('message').select();
+    let result2 = DB('message').select();
+    let _count = 0;
+    await result.count().then((count) => {
+        _count = count[0]['count(*)'];
+        return result2.limit(pageSize).offset(pageSize * (thisPage - 1));
+    }).then(function (info) {
+        ctx.state = { code: httpCode.successCode, data: { list: info, recordCount: _count }, stateCode: httpCode.successCode };
     }, function (e) {
         ctx.state = { code: e.sqlState, data: e.sqlMessage, stateCode: httpCode.sqlErrorCode };
     })
+
 }
 
 async function remove(ctx, next) {

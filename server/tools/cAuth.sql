@@ -110,6 +110,7 @@ CREATE TABLE `message` (
   `content` varchar(200) NOT NULL,
   `agree` int NOT NULL DEFAULT 0,
   `type`  int NOT NULL DEFAULT 1,
+  `hideName` int DEFAULT 1,
   `belongId` int(11) NOT NULL DEFAULT 0,
   `position` varchar(50) NOT NULL DEFAULT '0,0,0',
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

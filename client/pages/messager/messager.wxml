@@ -1,14 +1,19 @@
 <view class="container-main messageContainer {{activeTab!=='messager'&&'hide'}}">
-    <view class='addMsgWrapper'>
-        <i class="icon-addmessage" bindtap='showMsgInput'></i>
-        <view class="{{addMsgHide&&'active'}}">
-            <input type="text" placeholder="在此输入新留言" />
-            <i class="icon-niming"></i>
-            
-            <i class="icon-shortcut"></i>
-        </view>
+  <view class='addMsgWrapper'>
+    <i class="icon-addmessage" data-order='show' bindtap='messageHandler'></i>
+    <view class="{{addMsgHide&&'active'}}">
+      <input maxlength='30' type="text" placeholder="在此输入新留言" data-order='input' bindinput='messageHandler' />
+      <i class="icon-niming {{!newMessage.isHideName?'':'disable'}}" data-order='hidename' bindtap='messageHandler'></i>
+      <i class="icon-shortcut" data-order='send' bindtap='messageHandler'></i>
     </view>
-    <view wx:for="{{messageList}}" wx:key="{{item.index}}" class='msgItemWrap'>
-            <text style="-webkit-transform: translate3d({{item.skew[0]}}px, {{item.skew[1]}}px,0) rotate({{item.skew[2]}}deg)">{{item.content}}</text>
+  </view>
+  <scroll-view scroll-y lower-threshold='10' bindscrolltolower="renderMesList">
+    <view class='msgListWrap'>
+      <view wx:for="{{messageList}}" wx:key="{{item.index}}" class='msgItemWrap'>
+        <text style="-webkit-transform: translate3d({{item.skew[0]}}px, {{item.skew[1]}}px,0) rotate({{item.skew[2]}}deg)">{{item.content}}</text>
+      </view>
     </view>
+
+  </scroll-view>
+
 </view>

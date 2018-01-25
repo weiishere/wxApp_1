@@ -1,5 +1,5 @@
 const util = require('../../utils/util.js');
-var config = require('../../config');
+const config = require('../../config');
 
 module.exports = {
   getMenuList: function (param) {

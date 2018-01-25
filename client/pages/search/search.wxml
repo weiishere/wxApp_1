@@ -1,4 +1,4 @@
-<view class="searchContainer {{!searchVislble&&'hide'}} {{isIn?'in':''}}">
+<view class="searchContainer {{!searchVislble&&'hide'}} {{searchisIn?'in':''}}">
     <view class='searchWrapper'>
         <view data-order='back' catchtap="searchOrder">
             <i class='icon-close'></i>

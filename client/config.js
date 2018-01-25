@@ -1,9 +1,9 @@
 /**
  * 小程序配置文件
  */
-//var host = "http://localhost:5757";
+var host = "http://localhost:5757";
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://q0ymddaf.qcloud.la';
+//var host = 'https://q0ymddaf.qcloud.la';
 
 var config = {
   goodsApi: {
@@ -33,6 +33,12 @@ var config = {
   goods2tagApi:{
     list: `${host}/weapp/goods2tag/list`,
     update: `${host}/weapp/goods2tag/update`
+  },
+  messageApi:{
+    list: `${host}/weapp/message/list`,
+    insert: `${host}/weapp/message/insert`,
+    remove: `${host}/weapp/message/remove`,
+    updateAgree: `${host}/weapp/message/update`
   },
   // 下面的地址配合云端 Demo 工作
   service: {

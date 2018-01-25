@@ -116,15 +116,12 @@ Page({
         title: '2018新年快乐，迪奥为您呈现'
       }
     ],
-    tagList: [],
-    tagList_copy: [],
+
     sliderSet: {
       autoplay: true,
       circular: true
     },
     activeTab: 'home',
-    searchVislble: false,
-    isIn: false,
     ...searchManager.data,
     ...messagerManager.data
   },
@@ -161,30 +158,6 @@ Page({
       showGoodList: this.getActiveGoodsList(chooseMenu)
     })
   },
-  goSearch: function () {
-    this.setData({
-      searchVislble: true
-    });
-    setTimeout(() => {
-      this.setData({
-        isIn: true
-      });
-    }, 10);
-    setTimeout(() => {
-      if (this.data.tagList_copy.length === 0) {
-        this.getTagsList({}).then((data) => {
-          this.data.tagList_copy = data.data;
-          this.setData({
-            tagList: data.data
-          });
-        });
-      } else {
-        this.setData({
-          tagList: util.clone(this.data.tagList_copy)
-        });
-      }
-    }, 400);
-  },
   bindViewTap: function () {
     wx.navigateTo({
       url: '../details/details'
@@ -193,8 +166,9 @@ Page({
   footerChange: function (event) {
     this.setData({
       activeTab: event.currentTarget.dataset.key,
-      isIn: false
+      searchisIn: false
     });
+    this[event.currentTarget.dataset.key + 'Show']();
     setTimeout(() => {
       this.setData({
         searchVislble: false,
@@ -202,6 +176,7 @@ Page({
       });
     }, 400);
   },
+  homeShow: function () { },
   onLoad: function () {
     const menu = this.getActiveMenu();
     const goodList = this.getActiveGoodsList(menu);
