@@ -111,6 +111,7 @@ CREATE TABLE `message` (
   `agree` int NOT NULL DEFAULT 0,
   `type`  int NOT NULL DEFAULT 1,
   `belongId` int(11) NOT NULL DEFAULT 0,
+  `position` varchar(50) NOT NULL DEFAULT '0,0,0',
   `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) 
 )ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='留言表';

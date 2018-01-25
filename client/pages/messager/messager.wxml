@@ -3,25 +3,12 @@
         <i class="icon-addmessage" bindtap='showMsgInput'></i>
         <view class="{{addMsgHide&&'active'}}">
             <input type="text" placeholder="在此输入新留言" />
+            <i class="icon-niming"></i>
+            
             <i class="icon-shortcut"></i>
         </view>
     </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
-    </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
-    </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
-    </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
-    </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
-    </view>
-    <view class='msgItemWrap'>
-      <text>这是一个留言</text>
+    <view wx:for="{{messageList}}" wx:key="{{item.index}}" class='msgItemWrap'>
+            <text style="-webkit-transform: translate3d({{item.skew[0]}}px, {{item.skew[1]}}px,0) rotate({{item.skew[2]}}deg)">{{item.content}}</text>
     </view>
 </view>
