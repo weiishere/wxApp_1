@@ -2,13 +2,14 @@ const { DB } = require('./db');
 const httpCode = require('../utils/httpCode');
 
 async function insert(ctx, next) {
-    const { open_id, content, hideName } = ctx.request.body;
+    const { open_id, content, hideName, style } = ctx.request.body;
     await DB('message')
         .returning('id')
         .insert({
             open_id: open_id,
             content: content,
-            hideName: hideName
+            hideName: hideName,
+            style: style
         }).then(function (info) {
             ctx.state = { code: httpCode.successCode, data: info, stateCode: httpCode.successCode };
         }, function (e) {
@@ -19,7 +20,7 @@ async function insert(ctx, next) {
 async function list(ctx, next) {
     const { thisPage, pageSize } = ctx.query;
     let result = DB('message').select();
-    let result2 = DB('message').select();
+    let result2 = DB('message').select('message.content','message.hideName','message.createDate','message.style','cSessionInfo.user_info').join('cSessionInfo', {'message.open_id': 'cSessionInfo.open_id'}).orderBy('createDate', 'desc');
     let _count = 0;
     await result.count().then((count) => {
         _count = count[0]['count(*)'];

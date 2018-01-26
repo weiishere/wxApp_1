@@ -1,9 +1,9 @@
 /**
  * 小程序配置文件
  */
-var host = "http://localhost:5757";
+//var host = "http://localhost:5757";
 // 此处主机域名修改成腾讯云解决方案分配的域名
-//var host = 'https://q0ymddaf.qcloud.la';
+var host = 'https://q0ymddaf.qcloud.la';
 
 var config = {
   goodsApi: {
@@ -51,7 +51,7 @@ var config = {
     requestUrl: `${host}/weapp/user`,
 
     // 测试的信道服务地址
-    tunnelUrl: `${host}/weapp/tunnel`,
+    //tunnelUrl: `${host}/weapp/tunnel`,
 
     // 上传图片接口
     uploadUrl: `${host}/weapp/upload`

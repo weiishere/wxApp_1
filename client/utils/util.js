@@ -10,6 +10,9 @@ Array.prototype.remove = function (val) {
     this.splice(index, 1);
   }
 }
+String.prototype.trim = function () {
+  return this.replace(/(^\s*)|(\s*$)/g, '');
+}
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -136,4 +139,4 @@ var clone = function (obj) {
   }
   throw new Error("Unable to copy obj! Its type isn't supported.");
 }
-module.exports = { formatTime, showBusy, showSuccess, showModel, getObject, getItemDataByServer, singleRequest,clone }
+module.exports = { formatTime, showBusy, showSuccess, showModel, getObject, getItemDataByServer, singleRequest, clone }
