@@ -183,6 +183,7 @@
     -webkit-transform: translate3d(0, 10%, 0) scale(.85, .85);
     opacity: 0;
     -webkit-animation: intoAffect 0.3s ease-out forwards;
+    
 }
 
 .goodsItem .imageWapper {
@@ -209,19 +210,32 @@
 
 .goodsItem .goodsPrice {
     line-height: 70rpx;
+    position: relative
+}
+
+.goodsItem .goodsPrice .likeWrap {
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    right: 30rpx;
+    top: 5rpx;
+}
+
+.goodsItem .goodsPrice .likeWrap i {
+    font-family: "iconfont";
+    font-size: 44rpx;
+    color: #ff5983
 }
 
 .goodsItem .goodsPrice text:first-child {
     color: red;
     font-weight: bold;
     font-size: 40rpx;
+    float: left;
+    margin-right: 30rpx;
 }
 
-.goodsItem .goodsPrice text:last-child {
-    color: #666;
-    font-size: 30rpx;
-    margin-left: 30rpx;
-}
+
 
 .goodsItem .goodsRemark {
     color: #999;
