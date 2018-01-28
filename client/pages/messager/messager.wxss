@@ -103,11 +103,12 @@ page {
     display: inline-block
 }
 .msgItemWrap .msgItemOuter view {
-    border-bottom: dotted 1px #999
+    border-bottom: dotted 1px #333
 }
 
 .msgItemWrap .msgItemOuter.color1 {
     background: linear-gradient(-150deg, transparent 20rpx, rgb(144, 153, 233) 0, rgb(81, 78, 230) 70%);
+    color: #fff;
 }
 .msgItemWrap .msgItemOuter.color1::before{
     background: rgba(241, 62, 62, 0.5);

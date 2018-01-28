@@ -130,7 +130,7 @@ module.exports = {
                 util.singleRequest({
                     url: config.messageApi.insert,
                     postData: {
-                        open_id: self.data.userInfo.nickName,
+                        open_id: self.data.userInfo.openId,
                         content: self.data.newMessage.content.trim(),
                         hideName: +self.data.newMessage.isHideName,
                         style: _style.join(',')
