@@ -5,7 +5,7 @@
         <swiper autoplay="{{sliderSet.autoplay}}" circular="{{sliderSet.circular}}">
           <block wx:for="{{imgUrls}}" wx:key="{{index}}">
             <swiper-item>
-              <image src="{{item.url}}" class="slide-image" bindtap='bindViewTap' />
+              <image src="{{item.imageUrl}}" class="slide-image" bindtap='bindViewTap' />
               <view class='swiperTitle'>{{item.title}}</view>
             </swiper-item>
           </block>
@@ -24,7 +24,7 @@
       </view>
       <view class='mainWrapper'>
         <scroll-view class='sideBar' scroll-y>
-          <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" data-id="{{item.menuId}}" bindtap="chooseMenu">
+          <view class='menuItem {{item.isActive?"active":""}}' wx:for="{{menuList}}" wx:key="index" data-id="{{item.id}}" bindtap="chooseMenu">
             <template is="menuItem" data="{{...item}}" />
           </view>
         </scroll-view>
@@ -79,7 +79,7 @@
 </template>
 <template name="goodsItem">
   <view class='imageWapper'>
-    <image src="{{image}}"></image>
+    <image src="{{mainImage}}"></image>
   </view>
   <view class='goodTitle'>
     <i class="icon-product"></i>

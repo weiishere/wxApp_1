@@ -40,37 +40,6 @@ Page({
       //   icon: 'home',
       //   // iconColor:'F01B2D'
       //   isActive: true
-      // },
-      // {
-      //   id: 2,
-      //   menuId: 2,
-      //   name: '最新上架',
-      //   icon: 'new',
-
-      // },
-      // {
-      //   id: 3,
-      //   menuId: 3,
-      //   name: '护肤美妆',
-      //   icon: 'brand-makeup'
-      // },
-      // {
-      //   id: 4,
-      //   menuId: 4,
-      //   name: '首饰精品',
-      //   icon: 'jewelry'
-      // },
-      // {
-      //   id: 5,
-      //   menuId: 5,
-      //   name: '母婴喂养',
-      //   icon: 'baby1'
-      // },
-      // {
-      //   id: 6,
-      //   menuId: 6,
-      //   name: '其他精品',
-      //   icon: 'Recommend'
       // }
     ],
     imgUrls: [
@@ -78,16 +47,6 @@ Page({
       //   id: 1,
       //   url: 'https://gss3.bdstatic.com/70cFsjip0QIZ8tyhnq/img/iknow/aazdpinpai.png',
       //   title: '好妈妈，从这里坐起，你需要知道的育儿知识'
-      // },
-      // {
-      //   id: 2,
-      //   url: 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937',
-      //   title: 'THE ICONIC COLLECTION，別具特色的系列'
-      // },
-      // {
-      //   id: 3,
-      //   url: 'https://www.dior.cn/beauty/zh_cn/store/campaign/newyear2018/pc/new-year_03.jpg',
-      //   title: '2018新年快乐，迪奥为您呈现'
       // }
     ],
     goods: {

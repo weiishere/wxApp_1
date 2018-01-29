@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js');
+const { getTagsList} = require('../admin/tag.js');
 
 module.exports = {
   data: {
@@ -33,7 +34,7 @@ module.exports = {
       }, 10);
       setTimeout(() => {
         if (this.data.tagList_copy.length === 0) {
-          this.getTagsList({}).then((data) => {
+          getTagsList({}).then((data) => {
             this.data.tagList_copy = data.data;
             this.setData({
               tagList: data.data

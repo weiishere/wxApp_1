@@ -2,8 +2,12 @@ const util = require('../../utils/util.js');
 
 const config = require('../../config');
 const searchManager = require('../search/search.js');
-const tagManager = require('../admin/tag.js');
+const { getMenuList } = require('../admin/menu.js');
 const messagerManager = require('../messager/messager.js');
+const likeManager = require('../like/like.js');
+const goodsManager = require('../admin/goods.js');
+const aboutManager = require('../about/about.js');
+const { getBannerList } = require('../admin/banner');
 
 Page({
   data: {
@@ -105,18 +109,18 @@ Page({
       },
     ],
     imgUrls: [
-      {
-        url: 'https://gss3.bdstatic.com/70cFsjip0QIZ8tyhnq/img/iknow/aazdpinpai.png',
-        title: '好妈妈，从这里坐起，你需要知道的育儿知识'
-      },
-      {
-        url: 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937',
-        title: 'THE ICONIC COLLECTION，別具特色的系列'
-      },
-      {
-        url: 'https://www.dior.cn/beauty/zh_cn/store/campaign/newyear2018/pc/new-year_03.jpg',
-        title: '2018新年快乐，迪奥为您呈现'
-      }
+      // {
+      //   url: 'https://gss3.bdstatic.com/70cFsjip0QIZ8tyhnq/img/iknow/aazdpinpai.png',
+      //   title: '好妈妈，从这里坐起，你需要知道的育儿知识'
+      // },
+      // {
+      //   url: 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937',
+      //   title: 'THE ICONIC COLLECTION，別具特色的系列'
+      // },
+      // {
+      //   url: 'https://www.dior.cn/beauty/zh_cn/store/campaign/newyear2018/pc/new-year_03.jpg',
+      //   title: '2018新年快乐，迪奥为您呈现'
+      // }
     ],
     logged: false,
     userInfo: {},
@@ -126,11 +130,15 @@ Page({
     },
     activeTab: 'home',
     ...searchManager.data,
-    ...messagerManager.data
+    ...messagerManager.data,
+    ...likeManager.data,
+    ...aboutManager.data
   },
   ...searchManager.handler,
   ...messagerManager.handler,
-  ...tagManager,
+  ...likeManager.handler,
+  ...aboutManager.handler,
+  ...goodsManager,
   getActiveMenu: function () {
     let _item;
     this.data.menuList.forEach((item) => {
@@ -138,28 +146,42 @@ Page({
     })
     return _item;
   },
-  getActiveGoodsList: function (menu) {
-    let _goodList = [];
-    this.data.goodsList.forEach((item) => {
-      if (item.category === menu.menuId) _goodList.push(item);
-    })
-    return _goodList;
-  },
+  // getActiveGoodsList: function (menu) {
+  //   let _goodList = [];
+  //   goodsManager.getGoodsList().then(data => {
+
+  //   })
+  //   // this.data.goodsList.forEach((item) => {
+  //   //   if (item.category === menu.menuId) _goodList.push(item);
+  //   // })
+  //   return _goodList;
+  // },
   chooseMenu: function (event) {
     const chooseMenuId = event.currentTarget.dataset.id;
-    let chooseMenu;
-    this.data.menuList.forEach((item) => {
-      if (item.menuId !== chooseMenuId) {
-        item.isActive = false;
-      } else {
-        item.isActive = true;
-        chooseMenu = item;
-      }
+    // let chooseMenu;
+    // this.data.menuList.forEach((item) => {
+    //   if (item.menuId !== chooseMenuId) {
+    //     item.isActive = false;
+    //   } else {
+    //     item.isActive = true;
+    //     chooseMenu = item;
+    //   }
+    // });
+    // this.setData({
+    //   menuList: this.data.menuList,
+    //   showGoodList: this.getActiveGoodsList(chooseMenu)
+    // })
+    const chooseMenu = util.getObject(this.data.menuList, 'id', chooseMenuId, (item, i) => {
+      //item['isActive'] = false;
+      item['isActive'] = (item.id === chooseMenuId);
     });
-    this.setData({
-      menuList: this.data.menuList,
-      showGoodList: this.getActiveGoodsList(chooseMenu)
-    })
+    this.getGoodsList({ category: chooseMenuId }).then(data => {
+      this.setData({
+        showGoodList: data.list,
+        showMenu: chooseMenu,
+        menuList: this.data.menuList,
+      });
+    });
   },
   bindViewTap: function () {
     wx.navigateTo({
@@ -180,7 +202,7 @@ Page({
     }, 400);
   },
   homeShow: function () { },
-  userLogin:function(){
+  userLogin: function () {
     if (this.data.logged) return
     util.showBusy('正在登录')
     let that = this
@@ -221,13 +243,30 @@ Page({
     })
   },
   onLoad: function () {
-    const menu = this.getActiveMenu();
-    const goodList = this.getActiveGoodsList(menu);
-    console.log(goodList);
-    this.setData({
-      showGoodList: goodList,
-      showMenu: menu
+    getMenuList().then(menuData => {
+      let menuList = menuData.data;
+      menuList[0]['isActive'] = true;
+      this.setData({
+        menuList: menuList
+      });
+      //const menu = this.getActiveMenu();
+      Promise.all([getBannerList(), this.getGoodsList({ category: menuList[0].id })]).then(values => {
+        this.setData({
+          showGoodList: values[1].list,
+          showMenu: menuList[0],
+          imgUrls: values[0].data,
+        });
+      });
+
+      
+      // const goodList = this.getActiveGoodsList(menuList[0]);
+      // this.setData({
+      //   showGoodList: goodList,
+      //   showMenu: menuList[0]
+      // });
     });
+
+
     this.userLogin();
   }
 });
