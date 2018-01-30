@@ -1,5 +1,5 @@
 const util = require('../../utils/util.js');
-
+const Pager = require('../../utils/pager.js');
 const config = require('../../config');
 const searchManager = require('../search/search.js');
 const { getMenuList } = require('../admin/menu.js');
@@ -8,6 +8,7 @@ const likeManager = require('../like/like.js');
 const goodsManager = require('../admin/goods.js');
 const aboutManager = require('../about/about.js');
 const { getBannerList } = require('../admin/banner');
+const defaultPgeSize = 10;
 
 Page({
   data: {
@@ -46,82 +47,20 @@ Page({
         icon: 'Recommend'
       }
     ],
-    goodsList: [
-      {
-        id: '111',
-        name: '爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        category: 1,
-        image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-        price: '￥180',
-        unit: '桶',
-        remark: '德国原装进口，接受整箱订购：￥175×8',
-        desc: ''
-      },
-      {
-        id: '112',
-        name: '2爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        category: 2,
-        image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-        price: '￥180',
-        unit: '桶',
-        remark: '德国原装进口，接受整箱订购：8*175',
-        desc: ''
-      },
-      {
-        id: '113',
-        name: '3爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        category: 3,
-        image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-        price: '￥180',
-        unit: '桶',
-        remark: '德国原装进口，接受整箱订购：8*175',
-        desc: ''
-      },
-      {
-        id: '114',
-        name: '4爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-        category: 4,
-        image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-        price: '￥180',
-        unit: '桶',
-        remark: '德国原装进口，接受整箱订购：8*175',
-        desc: ''
-      },
-      {
-        id: '115',
-        name: '爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-        category: 1,
-        image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-        price: '￥230',
-        unit: '桶',
-        remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-        desc: ''
-      },
-      {
-        id: '115',
-        name: '澳洲爱他美aptamil白金版婴幼儿奶粉 3段(12个月以上)900g',
-        category: 5,
-        image: 'https://img11.360buyimg.com//n0/jfs/t2821/33/3160571466/452335/5faac900/5786fa96N40a8d09d.jpg',
-        price: '￥210',
-        unit: '桶',
-        remark: '40年骄“澳”升级之作，科学配比，助益宝宝健康~爱他美，贴合天生营养所需，接受整箱订购：￥205×8',
-        desc: ''
-      },
-    ],
-    imgUrls: [
-      // {
-      //   url: 'https://gss3.bdstatic.com/70cFsjip0QIZ8tyhnq/img/iknow/aazdpinpai.png',
-      //   title: '好妈妈，从这里坐起，你需要知道的育儿知识'
-      // },
-      // {
-      //   url: 'https://www.swarovski.com.cn/Web_CN/zh/binary/gentics-content?contentid=10008.519937',
-      //   title: 'THE ICONIC COLLECTION，別具特色的系列'
-      // },
-      // {
-      //   url: 'https://www.dior.cn/beauty/zh_cn/store/campaign/newyear2018/pc/new-year_03.jpg',
-      //   title: '2018新年快乐，迪奥为您呈现'
-      // }
-    ],
+    goodsList: [],
+    // [
+    //   {
+    //     id: '111',
+    //     name: '爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
+    //     category: 1,
+    //     image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
+    //     price: '￥180',
+    //     unit: '桶',
+    //     remark: '德国原装进口，接受整箱订购：￥175×8',
+    //     desc: ''
+    //   }
+    // ],
+    imgUrls: [],
     logged: false,
     userInfo: {},
     sliderSet: {
@@ -139,49 +78,48 @@ Page({
   ...likeManager.handler,
   ...aboutManager.handler,
   ...goodsManager,
-  getActiveMenu: function () {
-    let _item;
-    this.data.menuList.forEach((item) => {
-      if (item.isActive) _item = item;
-    })
-    return _item;
-  },
-  // getActiveGoodsList: function (menu) {
-  //   let _goodList = [];
-  //   goodsManager.getGoodsList().then(data => {
-
-  //   })
-  //   // this.data.goodsList.forEach((item) => {
-  //   //   if (item.category === menu.menuId) _goodList.push(item);
-  //   // })
-  //   return _goodList;
-  // },
+  
   chooseMenu: function (event) {
-    const chooseMenuId = event.currentTarget.dataset.id;
-    // let chooseMenu;
-    // this.data.menuList.forEach((item) => {
-    //   if (item.menuId !== chooseMenuId) {
-    //     item.isActive = false;
-    //   } else {
-    //     item.isActive = true;
-    //     chooseMenu = item;
-    //   }
-    // });
-    // this.setData({
-    //   menuList: this.data.menuList,
-    //   showGoodList: this.getActiveGoodsList(chooseMenu)
-    // })
-    const chooseMenu = util.getObject(this.data.menuList, 'id', chooseMenuId, (item, i) => {
-      //item['isActive'] = false;
-      item['isActive'] = (item.id === chooseMenuId);
-    });
-    this.getGoodsList({ category: chooseMenuId }).then(data => {
+    let chooseMenuId, chooseMenu;
+    let isLoadMore = event.currentTarget.dataset.id ? false : true;
+    if (!isLoadMore) {
+      chooseMenuId = event.currentTarget.dataset.id;
+      chooseMenu = util.getObject(this.data.menuList, 'id', chooseMenuId, (item, i) => {
+        item['isActive'] = (item.id === chooseMenuId);
+      });
+    } else {
+      chooseMenuId = util.getObject(this.data.menuList, 'isActive', true).id;
+      chooseMenu = util.getObject(this.data.menuList, 'id', chooseMenuId);
+    }
+    let _goodsList = util.getObject(this.data.goodsList, 'category', chooseMenuId);
+    if (_goodsList && !isLoadMore) {
+      //有event说明是重新选择了菜单
       this.setData({
-        showGoodList: data.list,
+        showGoodList: _goodsList.goods,
         showMenu: chooseMenu,
         menuList: this.data.menuList,
+        isMore: _goodsList.isMore
       });
-    });
+    } else {
+      //第一次加载数据或者更多
+      const _goodsBundle = util.getObject(this.data.goodsList, 'category', chooseMenuId);
+      if (_goodsBundle && !_goodsBundle.isMore) {
+        return;
+      }
+      this.getGoodsList({
+        category: chooseMenuId,
+        thisPage: !isLoadMore ? 1 : ++_goodsList.pager.thisPage,
+        pageSize: defaultPgeSize
+      }).then(data => {
+        let result = this.joinGoodsList(chooseMenuId, data.list, data.recordCount);
+        this.setData({
+          showGoodList: result.goods,
+          showMenu: chooseMenu,
+          menuList: this.data.menuList,
+          isMore: result.isMore
+        });
+      });
+    }
   },
   bindViewTap: function () {
     wx.navigateTo({
@@ -242,6 +180,24 @@ Page({
       }
     })
   },
+  joinGoodsList: function (category, goodsList, recordCount) {
+    let goodsBundle = util.getObject(this.data.goodsList, 'category', category);
+    if (!goodsBundle) {
+      let _obj = {
+        category: category,
+        goods: goodsList,
+        pager: new Pager({ pageSize: defaultPgeSize }),
+        isMore: goodsList.length === recordCount ? false : true
+      }
+      this.data.goodsList.push(_obj);
+      return _obj;
+    } else {
+      let newArray = goodsBundle.goods.concat(...goodsList);
+      goodsBundle.goods = newArray;
+      goodsBundle.isMore = newArray.length === recordCount ? false : true;
+      return goodsBundle;
+    }
+  },
   onLoad: function () {
     getMenuList().then(menuData => {
       let menuList = menuData.data;
@@ -249,16 +205,22 @@ Page({
       this.setData({
         menuList: menuList
       });
-      //const menu = this.getActiveMenu();
-      Promise.all([getBannerList(), this.getGoodsList({ category: menuList[0].id })]).then(values => {
+      Promise.all([getBannerList(), this.getGoodsList({
+        category: menuList[0].id,
+        thisPage: 1,
+        pageSize: defaultPgeSize
+      })]).then(values => {
+        let result = this.joinGoodsList(menuList[0].id, values[1].list, values[1].recordCount);
+        result.pager.init({ recordCount: values[1].recordCount });
         this.setData({
           showGoodList: values[1].list,
           showMenu: menuList[0],
           imgUrls: values[0].data,
+          isMore: result.isMore
         });
       });
 
-      
+
       // const goodList = this.getActiveGoodsList(menuList[0]);
       // this.setData({
       //   showGoodList: goodList,

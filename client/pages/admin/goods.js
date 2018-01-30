@@ -34,8 +34,8 @@ module.exports = {
         delete param.category;
         param['orderby'] = 'recommend,desc'
       }
-      param['thisPage'] = this.goodsPager.thisPage;
-      param['pageSize'] = this.goodsPager.pageSize;
+      param['thisPage'] = param.thisPage || this.goodsPager.thisPage;
+      param['pageSize'] = param.pageSize || this.goodsPager.pageSize;
     }
     wx.showLoading('加载中...');
     return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ module.exports = {
     const postData = {};
     const self = this;
     fromsList.forEach(item => {
-      
+
       if (item.key === 'tagSet') {
         //标签设置
         let tags = [];

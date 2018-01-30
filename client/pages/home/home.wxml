@@ -28,10 +28,11 @@
             <template is="menuItem" data="{{...item}}" />
           </view>
         </scroll-view>
-        <scroll-view scroll-y enable-back-to-top class='mainListWrapper'>
+        <scroll-view scroll-y enable-back-to-top class='mainListWrapper' lower-threshold='30' bindscrolltolower="chooseMenu">
           <view class="goodsItem" wx:for="{{showGoodList}}" wx:key="id">
             <template is="goodsItem" data="{{...item}}" />
           </view>
+          <view class="emptyWrap"  wx:if="{{!isMore}}"><i class='icon-null'></i>已加载全部数据...</view>
         </scroll-view>
       </view>
     </view>

@@ -249,6 +249,12 @@
     margin-right: 10rpx;
 }
 
+.emptyWrap {text-align:center;color:#999}
+.emptyWrap i{
+  font-family: "iconfont";
+  margin-right: 10rpx;
+}
+
 .footer {
     width: 100%;
     height: 100rpx;
