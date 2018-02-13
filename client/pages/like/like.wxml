@@ -1,3 +1,5 @@
 <view class="container-main likeContainer {{activeTab!=='like'&&'hide'}}">
-    我的收藏
+    <view>
+    
+    </view>
 </view>

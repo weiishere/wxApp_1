@@ -62,6 +62,50 @@ module.exports = {
       })
     });
   },
+  getGoodsListWithLike: function (param) {
+    let chooseIndex = 0;
+    var self = this;
+
+    if (param && param.category) {
+      //console.log(_item.type)
+      const _item = util.getObject(this.data.menuList, 'id', param.category);
+      if (_item.type === 'category') {
+      } else if (_item.type === 'all') {
+        delete param.category;
+        param['orderby'] = 'createDate'
+      } else if (_item.type === 'recommend') {
+        //需要进行排序
+        delete param.category;
+        param['orderby'] = 'recommend,desc'
+      }
+      param['thisPage'] = param.thisPage || this.goodsPager.thisPage;
+      param['pageSize'] = param.pageSize || this.goodsPager.pageSize;
+    }
+    wx.showLoading('加载中...');
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: config.goodsApi.listWithLike,
+        data: param,
+        success: function (res) {
+          if (res.data.code === '00001') {
+            resolve({
+              list: res.data.data.list,
+              recordCount: res.data.data.recordCount,
+              chooseType: chooseIndex
+            });
+          } else {
+            reject();
+          }
+        },
+        fail: function () {
+          wx.showToast({ title: "请求错误~" })
+        },
+        complete: function () {
+          wx.hideLoading();
+        }
+      })
+    });
+  },
   getGoodsByPage: function (e) {
     if (!this.goodsPager.go(e.currentTarget.dataset.order)) { return false; }
     this.getGoodsList({ category: +this.data.menuList[this.data.goods.chooseType].id }).then((res) => {

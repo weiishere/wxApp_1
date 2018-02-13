@@ -78,7 +78,7 @@ Page({
   ...likeManager.handler,
   ...aboutManager.handler,
   ...goodsManager,
-  
+
   chooseMenu: function (event) {
     let chooseMenuId, chooseMenu;
     let isLoadMore = event.currentTarget.dataset.id ? false : true;
@@ -139,8 +139,33 @@ Page({
       });
     }, 400);
   },
+  likeHandler: function (event) {
+    const self = this;
+    if (this["isDoing"]) {
+      return;
+    }
+    this["isDoing"] = true;
+    const goodsId = event.currentTarget.dataset.id;
+    const isLike = event.currentTarget.dataset.isLike;
+    let goodsItem = util.getObject(this.data.showGoodList, 'id', goodsId);
+    this[isLike ? "removeLike" : "addLike"]({
+      goodsId: goodsId,
+      open_id: this.data.userInfo.openId,
+      success: function (data) {
+        self.isDoing = false;
+        if (isLike) {
+          goodsItem.likeId = null;
+        } else {
+          goodsItem.likeId = data.data[0];
+        }
+        self.setData({
+          showGoodList: self.data.showGoodList
+        });
+      }
+    });
+  },
   homeShow: function () { },
-  userLogin: function () {
+  userLogin: function (callback) {
     if (this.data.logged) return
     util.showBusy('正在登录')
     let that = this
@@ -153,7 +178,8 @@ Page({
           that.setData({
             userInfo: result,
             logged: true
-          })
+          });
+          callback && callback();
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
@@ -165,6 +191,7 @@ Page({
                 userInfo: result.data.data,
                 logged: true
               })
+              callback && callback();
             },
 
             fail(error) {
@@ -199,36 +226,36 @@ Page({
     }
   },
   onLoad: function () {
-    getMenuList().then(menuData => {
-      let menuList = menuData.data;
-      menuList[0]['isActive'] = true;
-      this.setData({
-        menuList: menuList
-      });
-      Promise.all([getBannerList(), this.getGoodsList({
-        category: menuList[0].id,
-        thisPage: 1,
-        pageSize: defaultPgeSize
-      })]).then(values => {
-        let result = this.joinGoodsList(menuList[0].id, values[1].list, values[1].recordCount);
-        result.pager.init({ recordCount: values[1].recordCount });
+    this.userLogin(() => {
+      getMenuList().then(menuData => {
+        let menuList = menuData.data;
+        menuList[0]['isActive'] = true;
         this.setData({
-          showGoodList: values[1].list,
-          showMenu: menuList[0],
-          imgUrls: values[0].data,
-          isMore: result.isMore
+          menuList: menuList
         });
+        Promise.all([getBannerList(), this.getGoodsListWithLike({
+          category: menuList[0].id,
+          thisPage: 1,
+          pageSize: defaultPgeSize,
+          open_id: this.data.userInfo.openId
+        })]).then(values => {
+          let result = this.joinGoodsList(menuList[0].id, values[1].list, values[1].recordCount);
+          result.pager.init({ recordCount: values[1].recordCount });
+          this.setData({
+            showGoodList: values[1].list,
+            showMenu: menuList[0],
+            imgUrls: values[0].data,
+            isMore: result.isMore
+          });
+        });
+
+
+        // const goodList = this.getActiveGoodsList(menuList[0]);
+        // this.setData({
+        //   showGoodList: goodList,
+        //   showMenu: menuList[0]
+        // });
       });
-
-
-      // const goodList = this.getActiveGoodsList(menuList[0]);
-      // this.setData({
-      //   showGoodList: goodList,
-      //   showMenu: menuList[0]
-      // });
     });
-
-
-    this.userLogin();
   }
 });

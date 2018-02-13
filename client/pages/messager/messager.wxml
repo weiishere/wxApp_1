@@ -7,7 +7,7 @@
       <i class="icon-shortcut" data-order='send' bindtap='messageHandler'></i>
     </view>
   </view>
-  <scroll-view scroll-y lower-threshold='10' bindscrolltolower="renderMesList">
+  <scroll-view scroll-y lower-threshold='30' bindscrolltolower="renderMesList">
     <view class='msgListWrap'>
       <view wx:for="{{messageList}}" wx:key="{{item.index}}" class='msgItemWrap'>
         <view style="-webkit-transform: translate3d({{item.skew[0]}}px, {{item.skew[1]}}px,0) rotate({{item.skew[2]}}deg)" class="msgItemOuter color{{item.skew[3]}}">

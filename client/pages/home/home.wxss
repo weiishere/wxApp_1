@@ -216,17 +216,21 @@
 
 .goodsItem .goodsPrice .likeWrap {
     position: absolute;
-    width: 50rpx;
+    width: 100rpx;
     height: 50rpx;
-    right: 30rpx;
+    right: 0;
     top: 5rpx;
+    text-align: center;
 }
 
 .goodsItem .goodsPrice .likeWrap i {
     font-family: "iconfont";
     font-size: 44rpx;
-    color: #ff5983
+    color: #ff5983;
 }
+ .goodsItem .goodsPrice .likeWrap i:active{
+  font-size: 54rpx;
+} 
 
 .goodsItem .goodsPrice text:first-child {
     color: red;
@@ -346,5 +350,14 @@
     }
     100% {
         -webkit-transform: scale(0, 1);
+    }
+}
+
+@-webkit-keyframes heartJump {
+    50% {
+        -webkit-transform: scale(1.2, 1.2);
+    }
+    100% {
+        -webkit-transform: scale(1, 1);
     }
 }

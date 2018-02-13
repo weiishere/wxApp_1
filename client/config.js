@@ -8,6 +8,7 @@ var host = 'https://q0ymddaf.qcloud.la';
 var config = {
   goodsApi: {
     list: `${host}/weapp/goods/list`,
+    listWithLike: `${host}/weapp/goods/listWithLike`,
     insert: `${host}/weapp/goods/insert`,
     remove: `${host}/weapp/goods/remove`,
     update: `${host}/weapp/goods/update`
@@ -39,6 +40,11 @@ var config = {
     insert: `${host}/weapp/message/insert`,
     remove: `${host}/weapp/message/remove`,
     updateAgree: `${host}/weapp/message/update`
+  },
+  likeApi: {
+    list: `${host}/weapp/like/list`,
+    insert: `${host}/weapp/like/insert`,
+    remove: `${host}/weapp/like/remove`
   },
   // 下面的地址配合云端 Demo 工作
   service: {

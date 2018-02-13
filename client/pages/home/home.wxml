@@ -89,8 +89,8 @@
   <view class='goodsPrice'>
     <text>{{price}}</text>
     <text>单位：{{unit}}</text>
-    <view class='likeWrap'>
-      <i class="icon-heartcoloring"></i>
+    <view class='likeWrap' data-id="{{id}}" data-is-like='{{likeId?true:false}}' bindtap='likeHandler'>
+      <i class="{{likeId?'icon-heartcoloring':'icon-heart'}}"></i>
     </view>
   </view>
   <view class='goodsRemark'>
