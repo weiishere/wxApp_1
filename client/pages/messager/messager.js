@@ -18,7 +18,7 @@ module.exports = {
         }
     },
     handler: {
-        messagePager: new Pager({ pageSize: 5 }),
+        messagePager: new Pager({ pageSize: 30 }),
         getRedom: function (minNum, maxNum) {
             switch (arguments.length) {
                 case 1: return parseInt(Math.random() * minNum + 1);

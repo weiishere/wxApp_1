@@ -98,7 +98,7 @@ var singleRequest = function ({ url, postData, success, error, fail, complete, a
     method: 'POST',
     success: function (res) {
       if (res.data.code == '00001') {
-        if (!alert) showSuccess('操作成功');
+        if (alert) showSuccess('操作成功');
         success && success(res.data);
       } else {
         showModel('操作失败(' + res.data.code + ')');

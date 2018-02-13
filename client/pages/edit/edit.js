@@ -1,3 +1,9 @@
+/*
+ * @Author: weisheres.huang 
+ * @Date: 2018-01-30 10:36:37 
+ * @Last Modified by:   weishere.huang 
+ * @Last Modified time: 2018-01-30 10:36:37 
+ */
 const util = require('../../utils/util.js');
 var config = require('../../config');
 const goodsManager = require('../admin/goods.js');

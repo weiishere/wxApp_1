@@ -4,25 +4,27 @@ const Pager = require('../../utils/pager.js');
 
 module.exports = {
   data: {
-    likeList: []
+    likeList: [],
+    isLikeMore: true
   },
   handler: {
-    messagePager: new Pager({ pageSize: 5 }),
+    likerPager: new Pager({ pageSize: 5 }),
     likeShow: function () {
-      debugger
       if (this.data.likeList.length === 0) {
         this.renderLikeList((data) => {
-          this.messagePager.init({ recordCount: data.recordCount });
+          this.likerPager.init({ recordCount: data.recordCount });
         })
       }
     },
     renderLikeList: function (callback) {
-      if (this.messagePager.go('next')) {
+      if (!this.data.isLikeMore) { return; }
+      if (this.likerPager.go('next')) {
         this.getLikeList().then((data) => {
           typeof callback === "function" && callback(data);
-          this.data.likeList.push(data);
+          const _data = this.data.likeList.concat(data.list);
           this.setData({
-            likeList: data
+            likeList: _data,
+            isLikeMore: _data.length == 0 ? false : true
           });
         });
       }
@@ -34,8 +36,8 @@ module.exports = {
         wx.request({
           url: config.likeApi.list,
           data: {
-            pageSize: self.messagePager.pageSize,
-            thisPage: self.messagePager.thisPage,
+            pageSize: self.likerPager.pageSize,
+            thisPage: self.likerPager.thisPage,
             open_id: self.data.userInfo.openId
           },
           success: function (res) {
@@ -64,22 +66,27 @@ module.exports = {
           goodsId: goodsId,
           open_id: open_id
         },
-        alert: true,
+        alert: false,
         success: function (data) {
           success && success(data);
         }
       });
     },
-    removeLike: function ({ goodsId, open_id, success }) {
-      util.singleRequest({
-        url: config.likeApi.remove,
-        postData: {
-          goodsId: goodsId,
-          open_id: open_id
-        },
-        alert: true,
-        success: function (data) {
-          success && success(data);
+    removeLike: function (event) {
+      const likeId = event.currentTarget.dataset.likeId;
+      wx.showModal({
+        title: '提示',
+        content: '亲，您确定要取消此产品的关注吗？',
+        success: function (res) {
+          if (res.confirm) {
+            util.singleRequest({
+              url: config.likeApi.remove,
+              postData: {
+                id: likeId
+              },
+              alert: true
+            });
+          }
         }
       });
     }
