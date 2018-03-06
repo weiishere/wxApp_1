@@ -12,54 +12,8 @@ const defaultPgeSize = 10;
 
 Page({
   data: {
-    menuList: [
-      {
-        menuId: 1,
-        name: '店主推荐',
-        icon: 'home',
-        // iconColor:'F01B2D'
-        isActive: true
-      },
-      {
-        menuId: 2,
-        name: '最新上架',
-        icon: 'new',
-
-      },
-      {
-        menuId: 3,
-        name: '护肤美妆',
-        icon: 'brand-makeup'
-      },
-      {
-        menuId: 4,
-        name: '首饰精品',
-        icon: 'jewelry'
-      },
-      {
-        menuId: 5,
-        name: '母婴喂养',
-        icon: 'baby1'
-      },
-      {
-        menuId: 6,
-        name: '其他精品',
-        icon: 'Recommend'
-      }
-    ],
+    menuList: [],
     goodsList: [],
-    // [
-    //   {
-    //     id: '111',
-    //     name: '爱他美Aptamil 儿童配方奶粉4段(36-72个月适用)800g',
-    //     category: 1,
-    //     image: 'https://img10.360buyimg.com/n1/jfs/t5632/225/2855201961/384545/197cc50/59350734Nd49bd2f6.jpg',
-    //     price: '￥180',
-    //     unit: '桶',
-    //     remark: '德国原装进口，接受整箱订购：￥175×8',
-    //     desc: ''
-    //   }
-    // ],
     imgUrls: [],
     logged: false,
     userInfo: {},
@@ -106,10 +60,12 @@ Page({
       if (_goodsBundle && !_goodsBundle.isMore) {
         return;
       }
-      this.getGoodsList({
+      //this.getGoodsList({
+      this.getGoodsListWithLike({
         category: chooseMenuId,
         thisPage: !isLoadMore ? 1 : ++_goodsList.pager.thisPage,
-        pageSize: defaultPgeSize
+        pageSize: defaultPgeSize,
+        open_id: this.data.userInfo.openId
       }).then(data => {
         let result = this.joinGoodsList(chooseMenuId, data.list, data.recordCount);
         this.setData({
@@ -179,6 +135,7 @@ Page({
             userInfo: result,
             logged: true
           });
+          console.log(result);
           callback && callback();
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
@@ -191,6 +148,7 @@ Page({
                 userInfo: result.data.data,
                 logged: true
               })
+              console.log(result.data.data);
               callback && callback();
             },
 

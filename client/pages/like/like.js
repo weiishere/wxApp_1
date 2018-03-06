@@ -5,13 +5,22 @@ const Pager = require('../../utils/pager.js');
 module.exports = {
   data: {
     likeList: [],
-    isLikeMore: true
+    isLikeMore: true,
+    isLikeReload: true
   },
   handler: {
     likerPager: new Pager({ pageSize: 5 }),
     likeShow: function () {
+      if (this.data.isLikeReload) {
+        this.setData({
+          likeList: [],
+          isLikeMore: true
+        });
+        this.likerPager.thisPage = 1;
+      }
       if (this.data.likeList.length === 0) {
         this.renderLikeList((data) => {
+          this.data.isLikeReload = false;
           this.likerPager.init({ recordCount: data.recordCount });
         })
       }
@@ -73,7 +82,12 @@ module.exports = {
       });
     },
     removeLike: function (event) {
+      const self = this;
       const likeId = event.currentTarget.dataset.likeId;
+      let index;
+      const chooseItem = util.getObject(this.data.likeList, 'goodsId', likeId, function (item, i) {
+        if (item.goodsId == likeId) { index = i; }
+      });
       wx.showModal({
         title: '提示',
         content: '亲，您确定要取消此产品的关注吗？',
@@ -84,9 +98,16 @@ module.exports = {
               postData: {
                 id: likeId
               },
-              alert: true
+              alert: true,
+              success: function () {
+                self.data.likeList.splice(index, 1);
+                self.setData({
+                  likeList: self.data.likeList
+                });
+              }
             });
           }
+          self.data.isLikeReload = true;
         }
       });
     }
