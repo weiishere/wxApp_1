@@ -75,7 +75,7 @@ async function listWithLike(ctx, next) {
     //查询单个数据才给出详情，列表不给
     let result = name ? DB('goods').where('name', 'like', '%' + escape(name) + '%') : DB('goods');
     let result2 = DB('goods').select('goods.id', 'like.id as likeId', 'name', 'category', 'mainImage', 'price', 'discount', 'unit', 'remark', 'recommend', 'storage', 'status', 'goods.createDate').leftJoin('like', function () {
-      this.on('goods.id', '=', 'like.goodsId').onIn('like.open_id', open_id)
+      this.on('goods.id', '=', 'like.goodsId').onIn('like.open_id', '=', open_id)
     })//.where({ 'like.open_id': open_id }).whereRaw('goods.id=like.goodsId');
     if (name) {
       result2 = result2.where('name', 'like', '%' + escape(name) + '%');
