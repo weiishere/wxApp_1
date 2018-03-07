@@ -184,7 +184,12 @@ Page({
     }
   },
   onLoad: function () {
-    this.userLogin(() => {
+    const localTest = config.localTest;
+    if (localTest) {
+      this.setData({
+        userInfo: config.testUserInfo,
+        logged: true
+      });
       getMenuList().then(menuData => {
         let menuList = menuData.data;
         menuList[0]['isActive'] = true;
@@ -206,14 +211,33 @@ Page({
             isMore: result.isMore
           });
         });
-
-
-        // const goodList = this.getActiveGoodsList(menuList[0]);
-        // this.setData({
-        //   showGoodList: goodList,
-        //   showMenu: menuList[0]
-        // });
       });
-    });
+    } else {
+      this.userLogin(() => {
+        getMenuList().then(menuData => {
+          let menuList = menuData.data;
+          menuList[0]['isActive'] = true;
+          this.setData({
+            menuList: menuList
+          });
+          Promise.all([getBannerList(), this.getGoodsListWithLike({
+            category: menuList[0].id,
+            thisPage: 1,
+            pageSize: defaultPgeSize,
+            open_id: this.data.userInfo.openId
+          })]).then(values => {
+            let result = this.joinGoodsList(menuList[0].id, values[1].list, values[1].recordCount);
+            result.pager.init({ recordCount: values[1].recordCount });
+            this.setData({
+              showGoodList: values[1].list,
+              showMenu: menuList[0],
+              imgUrls: values[0].data,
+              isMore: result.isMore
+            });
+          });
+        });
+      });
+    }
+
   }
 });

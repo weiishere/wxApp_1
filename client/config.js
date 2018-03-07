@@ -3,9 +3,11 @@
  */
 //var host = "http://localhost:5757";
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://q0ymddaf.qcloud.la';
+const localTest = false;
+var host = localTest ? "http://localhost:5757" : "https://q0ymddaf.qcloud.la";
 
 var config = {
+  localTest: localTest,
   goodsApi: {
     list: `${host}/weapp/goods/list`,
     listWithLike: `${host}/weapp/goods/listWithLike`,
@@ -25,17 +27,17 @@ var config = {
     remove: `${host}/weapp/menu/remove`,
     update: `${host}/weapp/menu/update`
   },
-  tagApi:{
+  tagApi: {
     list: `${host}/weapp/tag/list`,
     insert: `${host}/weapp/tag/insert`,
     remove: `${host}/weapp/tag/remove`,
     update: `${host}/weapp/tag/update`
   },
-  goods2tagApi:{
+  goods2tagApi: {
     list: `${host}/weapp/goods2tag/list`,
     update: `${host}/weapp/goods2tag/update`
   },
-  messageApi:{
+  messageApi: {
     list: `${host}/weapp/message/list`,
     insert: `${host}/weapp/message/insert`,
     remove: `${host}/weapp/message/remove`,
@@ -47,6 +49,16 @@ var config = {
     remove: `${host}/weapp/like/remove`
   },
   // 下面的地址配合云端 Demo 工作
+  testUserInfo: {
+    avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epxVr7z9CqDj3CxiakheCCh9YRB5J1v5Ao2mn5zJsKhEx9OLSicGTdBicibIZmIrHars4pZ6zXshKcDug/0",
+    city: "Chengdu",
+    country: "China",
+    gender: 1,
+    language: "zh_CN",
+    nickName: "Yellow great",
+    openId: "ogCv50Lz9Yn2v6sEBx9gt6VId1Zs",
+    province: "Sichuan"
+  },
   service: {
     host,
 

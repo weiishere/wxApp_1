@@ -1,4 +1,4 @@
-const { auth: { authorizationMiddleware, validationMiddleware } } = require('../qcloud')
+
 const banner = require('./banner');
 const menu = require('./menu');
 const goods = require('./goods');
@@ -20,7 +20,11 @@ router.use('/', tag.routes(), tag.allowedMethods());
 router.use('/', goods2tag.routes(), goods2tag.allowedMethods());
 router.use('/', message.routes(), message.allowedMethods());
 router.use('/', like.routes(), like.allowedMethods());
-router.post('/upload', controller.upload);
-router.get('/login', authorizationMiddleware, controller.login);
-router.get('/user', validationMiddleware, controller.user);
+try {
+    const { auth: { authorizationMiddleware, validationMiddleware } } = require('../qcloud')
+    router.post('/upload', controller.upload);
+    router.get('/login', authorizationMiddleware, controller.login);
+    router.get('/user', validationMiddleware, controller.user);
+} catch (e) { }
+
 module.exports = router;

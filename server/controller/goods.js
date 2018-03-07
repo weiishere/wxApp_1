@@ -75,7 +75,7 @@ async function listWithLike(ctx, next) {
     //查询单个数据才给出详情，列表不给
     let result = name ? DB('goods').where('name', 'like', '%' + escape(name) + '%') : DB('goods');
     let result2 = DB('goods').select('goods.id', 'like.id as likeId', 'name', 'category', 'mainImage', 'price', 'discount', 'unit', 'remark', 'recommend', 'storage', 'status', 'goods.createDate').leftJoin('like', function () {
-      this.on('goods.id', '=', 'like.goodsId').onIn('like.open_id', '=', open_id)
+      this.on('goods.id', '=', 'like.goodsId').onIn('like.open_id', [open_id])
     })//.where({ 'like.open_id': open_id }).whereRaw('goods.id=like.goodsId');
     if (name) {
       result2 = result2.where('name', 'like', '%' + escape(name) + '%');
@@ -88,13 +88,16 @@ async function listWithLike(ctx, next) {
       //     orderby = orderby.split(',');
 
       const order = orderby.split(',');
-      order[0] = 'goods.' + order[0];
+      //order[0] = 'goods.' + order[0];
       // // result = result.orderBy(orderby[0],orderby[1]);
       // // result2 = result2.orderBy(orderby[0],orderby[1]);
       // result = result.orderBy('recommend','desc');
       // result2 = result2.orderBy('recommend','desc');
-      result = result.orderBy(...order);
-      result2 = result2.orderBy(...order);
+
+      result = result.orderByRaw('`goods`.`' + order[0] + '` ' + order[1] + ',`goods`.`id` desc');//需要加上id次排序，不然顺序会随机混乱
+      result2 = result2.orderByRaw('`goods`.`' + order[0] + '` ' + order[1] + ',`goods`.`id` desc');
+      //result = result.orderBy(...order);
+      //result2 = result2.orderBy(...order);
     }
     let _count = 0;
     await result.count().then((count) => {
